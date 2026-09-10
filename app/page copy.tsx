@@ -1,7 +1,7 @@
-import { createClient } from '@/lib/supabase/server'
+import { createClient } from '@/lib/supabase/client'
 
 export default async function Home() {
-  const supabase = await createClient()
+  const supabase = createClient()
 
   const { data: shops, error } = await supabase
     .from('shops')
@@ -9,13 +9,7 @@ export default async function Home() {
 
   if (error) {
     console.error(error)
-
-    return (
-      <main>
-        <h1>Ayam Gepuk Rankings</h1>
-        <p>Failed to load shops.</p>
-      </main>
-    )
+    return <div>Failed to load shops</div>
   }
 
   return (
@@ -25,9 +19,7 @@ export default async function Home() {
       {shops?.map((shop) => (
         <div key={shop.id}>
           <h2>{shop.name}</h2>
-          <p>
-            {shop.city}, {shop.state}
-          </p>
+          <p>{shop.city}, {shop.state}</p>
         </div>
       ))}
     </main>
