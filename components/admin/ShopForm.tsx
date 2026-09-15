@@ -4,21 +4,39 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 
-export default function ShopForm() {
+type Shop = {
+  id: string;
+  name: string;
+  address: string | null;
+  city: string | null;
+  state: string | null;
+  description: string | null;
+  is_active: boolean;
+};
+
+type ShopFormProps = {
+  shop?: Shop;
+};
+
+export default function ShopForm({ shop }: ShopFormProps) {
   const router = useRouter();
 
-  const [name, setName] = useState("");
-  const [address, setAddress] = useState("");
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
-  const [description, setDescription] = useState("");
+  const isEditing = !!shop;
+
+  const [name, setName] = useState(shop?.name ?? "");
+
+  const [address, setAddress] = useState(shop?.address ?? "");
+
+  const [city, setCity] = useState(shop?.city ?? "");
+
+  const [state, setState] = useState(shop?.state ?? "");
+
+  const [description, setDescription] = useState(shop?.description ?? "");
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const handleSubmit = async (
-    e: React.FormEvent
-  ) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     setError("");
@@ -36,26 +54,42 @@ export default function ShopForm() {
       return;
     }
 
-    const { error } = await supabase
-      .from("shops")
-      .insert({
-        name,
-        address: address || null,
-        city: city || null,
-        state: state || null,
-        description: description || null,
+    const shopData = {
+      name,
+      address: address || null,
+      city: city || null,
+      state: state || null,
+      description: description || null,
+    };
+
+    if (isEditing) {
+      const { error } = await supabase
+        .from("shops")
+        .update(shopData)
+        .eq("id", shop.id);
+
+      if (error) {
+        console.error(error);
+
+        setError("Failed to update shop. Please try again.");
+
+        setLoading(false);
+        return;
+      }
+    } else {
+      const { error } = await supabase.from("shops").insert({
+        ...shopData,
         is_active: true,
       });
 
-    if (error) {
-      console.error(error);
+      if (error) {
+        console.error(error);
 
-      setError(
-        "Failed to create shop. Please try again."
-      );
+        setError("Failed to create shop. Please try again.");
 
-      setLoading(false);
-      return;
+        setLoading(false);
+        return;
+      }
     }
 
     router.push("/admin/shops");
@@ -63,21 +97,14 @@ export default function ShopForm() {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="space-y-6"
-    >
+    <form onSubmit={handleSubmit} className="space-y-6">
       <div>
-        <label className="mb-2 block font-medium">
-          Shop Name
-        </label>
+        <label className="mb-2 block font-medium">Shop Name</label>
 
         <input
           type="text"
           value={name}
-          onChange={(e) =>
-            setName(e.target.value)
-          }
+          onChange={(e) => setName(e.target.value)}
           required
           className="w-full rounded-lg border p-3"
           placeholder="e.g. Ayam Gepuk Pak Gembus"
@@ -85,16 +112,12 @@ export default function ShopForm() {
       </div>
 
       <div>
-        <label className="mb-2 block font-medium">
-          Address
-        </label>
+        <label className="mb-2 block font-medium">Address</label>
 
         <input
           type="text"
           value={address}
-          onChange={(e) =>
-            setAddress(e.target.value)
-          }
+          onChange={(e) => setAddress(e.target.value)}
           className="w-full rounded-lg border p-3"
           placeholder="Street address"
         />
@@ -102,32 +125,24 @@ export default function ShopForm() {
 
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
-          <label className="mb-2 block font-medium">
-            City
-          </label>
+          <label className="mb-2 block font-medium">City</label>
 
           <input
             type="text"
             value={city}
-            onChange={(e) =>
-              setCity(e.target.value)
-            }
+            onChange={(e) => setCity(e.target.value)}
             className="w-full rounded-lg border p-3"
             placeholder="e.g. Kuala Lumpur"
           />
         </div>
 
         <div>
-          <label className="mb-2 block font-medium">
-            State
-          </label>
+          <label className="mb-2 block font-medium">State</label>
 
           <input
             type="text"
             value={state}
-            onChange={(e) =>
-              setState(e.target.value)
-            }
+            onChange={(e) => setState(e.target.value)}
             className="w-full rounded-lg border p-3"
             placeholder="e.g. Selangor"
           />
@@ -135,15 +150,11 @@ export default function ShopForm() {
       </div>
 
       <div>
-        <label className="mb-2 block font-medium">
-          Description
-        </label>
+        <label className="mb-2 block font-medium">Description</label>
 
         <textarea
           value={description}
-          onChange={(e) =>
-            setDescription(e.target.value)
-          }
+          onChange={(e) => setDescription(e.target.value)}
           rows={4}
           className="w-full rounded-lg border p-3"
           placeholder="Short description of the shop..."
@@ -162,14 +173,12 @@ export default function ShopForm() {
           disabled={loading}
           className="rounded-lg bg-black px-5 py-3 font-medium text-white disabled:opacity-50"
         >
-          {loading ? "Saving..." : "Add Shop"}
+          {loading ? "Saving..." : isEditing ? "Save Changes" : "Add Shop"}
         </button>
 
         <button
           type="button"
-          onClick={() =>
-            router.push("/admin/shops")
-          }
+          onClick={() => router.push("/admin/shops")}
           className="rounded-lg border px-5 py-3 font-medium"
         >
           Cancel
