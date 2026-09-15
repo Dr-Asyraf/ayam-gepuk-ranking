@@ -33,6 +33,13 @@ export default async function AdminPage() {
 
         <div className="flex items-center gap-3">
           <Link
+            href="/admin/shops"
+            className="rounded-lg border px-5 py-3 font-medium hover:bg-gray-50"
+          >
+            Manage Shops
+          </Link>
+
+          <Link
             href="/admin/visits/new"
             className="rounded-lg bg-black px-5 py-3 font-medium text-white"
           >
