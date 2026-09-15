@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
+import LogoutButton from "@/components/admin/LogoutButton";
 
 export default async function AdminPage() {
   const supabase = await createClient();
@@ -30,12 +31,16 @@ export default async function AdminPage() {
           <p className="mt-1 text-gray-500">Manage your ayam gepuk rankings.</p>
         </div>
 
-        <Link
-          href="/admin/visits/new"
-          className="rounded-lg bg-black px-5 py-3 font-medium text-white"
-        >
-          + Add Review
-        </Link>
+        <div className="flex items-center gap-3">
+          <Link
+            href="/admin/visits/new"
+            className="rounded-lg bg-black px-5 py-3 font-medium text-white"
+          >
+            + Add Review
+          </Link>
+
+          <LogoutButton />
+        </div>
       </div>
 
       <div className="mb-8 grid gap-4 sm:grid-cols-3">

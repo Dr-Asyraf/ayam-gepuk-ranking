@@ -8,7 +8,6 @@ export default async function NewReviewPage() {
   data: { user },
 } = await supabase.auth.getUser()
 
-console.log("CURRENT USER:", user)
 
   const { data: shops, error } = await supabase
     .from('shops')
