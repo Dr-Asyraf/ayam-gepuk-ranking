@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
+import DeactivateShopButton from "@/components/admin/DeactivateShopButton";
 
 export default async function ShopsPage() {
   const supabase = await createClient();
@@ -14,13 +15,9 @@ export default async function ShopsPage() {
 
     return (
       <main className="mx-auto max-w-6xl p-8">
-        <h1 className="text-3xl font-bold">
-          Manage Shops
-        </h1>
+        <h1 className="text-3xl font-bold">Manage Shops</h1>
 
-        <p className="mt-4 text-red-600">
-          Failed to load shops.
-        </p>
+        <p className="mt-4 text-red-600">Failed to load shops.</p>
       </main>
     );
   }
@@ -29,9 +26,7 @@ export default async function ShopsPage() {
     <main className="mx-auto max-w-6xl p-8">
       <div className="mb-8 flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold">
-            Manage Shops
-          </h1>
+          <h1 className="text-3xl font-bold">Manage Shops</h1>
 
           <p className="mt-1 text-gray-500">
             Add and manage your ayam gepuk shops.
@@ -51,34 +46,21 @@ export default async function ShopsPage() {
           <table className="w-full">
             <thead className="bg-gray-50">
               <tr>
-                <th className="px-4 py-3 text-left">
-                  Shop
-                </th>
+                <th className="px-4 py-3 text-left">Shop</th>
 
-                <th className="px-4 py-3 text-left">
-                  Location
-                </th>
+                <th className="px-4 py-3 text-left">Location</th>
 
-                <th className="px-4 py-3 text-left">
-                  Status
-                </th>
+                <th className="px-4 py-3 text-left">Status</th>
 
-                <th className="px-4 py-3 text-left">
-                  Actions
-                </th>
+                <th className="px-4 py-3 text-left">Actions</th>
               </tr>
             </thead>
 
             <tbody>
               {shops.map((shop) => (
-                <tr
-                  key={shop.id}
-                  className="border-t"
-                >
+                <tr key={shop.id} className="border-t">
                   <td className="px-4 py-4">
-                    <div className="font-medium">
-                      {shop.name}
-                    </div>
+                    <div className="font-medium">{shop.name}</div>
 
                     {shop.address && (
                       <div className="text-sm text-gray-500">
@@ -89,16 +71,12 @@ export default async function ShopsPage() {
 
                   <td className="px-4 py-4">
                     {shop.city || "-"}
-                    {shop.state
-                      ? `, ${shop.state}`
-                      : ""}
+                    {shop.state ? `, ${shop.state}` : ""}
                   </td>
 
                   <td className="px-4 py-4">
                     {shop.is_active ? (
-                      <span className="font-medium text-green-600">
-                        Active
-                      </span>
+                      <span className="font-medium text-green-600">Active</span>
                     ) : (
                       <span className="font-medium text-gray-400">
                         Inactive
@@ -107,12 +85,18 @@ export default async function ShopsPage() {
                   </td>
 
                   <td className="px-4 py-4">
-                    <Link
-                      href={`/admin/shops/${shop.id}/edit`}
-                      className="font-medium underline"
-                    >
-                      Edit
-                    </Link>
+                    <div className="flex gap-4">
+                      <Link
+                        href={`/admin/shops/${shop.id}/edit`}
+                        className="font-medium underline"
+                      >
+                        Edit
+                      </Link>
+
+                      {shop.is_active && (
+                        <DeactivateShopButton shopId={shop.id} />
+                      )}
+                    </div>
                   </td>
                 </tr>
               ))}
@@ -121,9 +105,7 @@ export default async function ShopsPage() {
         </div>
       ) : (
         <div className="rounded-xl border p-8 text-center">
-          <p className="text-gray-500">
-            No shops have been added yet.
-          </p>
+          <p className="text-gray-500">No shops have been added yet.</p>
 
           <Link
             href="/admin/shops/new"
