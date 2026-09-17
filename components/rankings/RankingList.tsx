@@ -8,6 +8,7 @@ type Shop = {
   name: string;
   city: string | null;
   state: string | null;
+  image_url: string | null;
   overall_rating: number | string;
   chicken_rating: number | string;
   sambal_kacang_rating: number | string;
@@ -183,6 +184,7 @@ export default function RankingList({ shops }: RankingListProps) {
               name={shop.name}
               city={shop.city}
               state={shop.state}
+              imageUrl={shop.image_url}
               overallRating={Number(shop.overall_rating)}
               chickenRating={Number(shop.chicken_rating)}
               sambalKacangRating={Number(shop.sambal_kacang_rating)}

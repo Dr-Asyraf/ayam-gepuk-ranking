@@ -6,6 +6,7 @@ type RankingCardProps = {
   name: string;
   city: string | null;
   state: string | null;
+  imageUrl: string | null;
   overallRating: number;
   chickenRating: number;
   sambalKacangRating: number;
@@ -20,6 +21,7 @@ export default function RankingCard({
   name,
   city,
   state,
+  imageUrl,
   overallRating,
   chickenRating,
   sambalKacangRating,
@@ -42,54 +44,84 @@ export default function RankingCard({
   return (
     <Link
       href={`/shops/${id}`}
-      className={`block rounded-2xl border p-6 transition hover:-translate-y-1 hover:shadow-lg ${rankStyle}`}
+      className="block overflow-hidden rounded-2xl border bg-white transition hover:-translate-y-0.5 hover:shadow-md"
     >
-      {/* Top section */}
-      <div className="flex items-start justify-between gap-4">
-        <div className="flex items-start gap-4">
-          {/* Rank */}
-          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white text-lg font-bold shadow-sm">
-            {rankEmoji}
+      {/* Image */}
+      {imageUrl ? (
+        <div className="aspect-[16/7] w-full overflow-hidden bg-gray-100">
+          <img
+            src={imageUrl}
+            alt={name}
+            className="h-full w-full object-cover transition duration-300 hover:scale-105"
+          />
+        </div>
+      ) : (
+        <div className="flex aspect-[16/7] w-full items-center justify-center bg-gray-100">
+          <div className="text-center">
+            <div className="text-5xl">🍗</div>
+
+            <p className="mt-2 text-sm text-gray-400">No photo available</p>
           </div>
+        </div>
+      )}
 
-          {/* Shop information */}
-          <div>
-            <h2 className="text-xl font-bold">{name}</h2>
+      {/* Card content */}
+      <div
+        className={`rounded-b-2xl border-t p-6 transition hover:-translate-y-1 hover:shadow-lg ${rankStyle}`}
+      >
+        {/* Top section */}
+        <div className="flex items-start justify-between gap-4">
+          <div className="flex items-start gap-4">
+            {/* Rank */}
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white text-lg font-bold shadow-sm">
+              {rankEmoji}
+            </div>
 
-            {(city || state) && (
+            {/* Shop information */}
+            <div>
+              <h2 className="text-xl font-bold">{name}</h2>
+
+              {(city || state) && (
+                <p className="mt-1 text-sm text-gray-500">
+                  {[city, state].filter(Boolean).join(", ")}
+                </p>
+              )}
+
               <p className="mt-1 text-sm text-gray-500">
-                {[city, state].filter(Boolean).join(", ")}
+                {visitCount} {visitCount === 1 ? "visit" : "visits"}
               </p>
-            )}
+            </div>
+          </div>
 
-            <p className="mt-1 text-sm text-gray-500">
-              {visitCount} {visitCount === 1 ? "visit" : "visits"}
-            </p>
+          {/* Overall rating */}
+          <div className="text-right">
+            <p className="text-4xl font-bold">{overallRating.toFixed(2)}</p>
+
+            <p className="text-sm text-gray-400">/ 10</p>
           </div>
         </div>
 
-        {/* Overall rating */}
-        <div className="text-right">
-          <p className="text-4xl font-bold">{overallRating.toFixed(2)}</p>
+        {/* Category ratings */}
+        <div className="mt-6 grid grid-cols-2 gap-3 text-sm">
+          <Rating emoji="🍗" label="Chicken" value={chickenRating} />
 
-          <p className="text-sm text-gray-400">/ 10</p>
+          <Rating
+            emoji="🌶️"
+            label="Sambal & Kacang"
+            value={sambalKacangRating}
+          />
+
+          <Rating emoji="🥬" label="Sayur" value={sayurRating} />
+
+          <Rating emoji="🍳" label="Sides" value={sidesRating} />
         </div>
-      </div>
 
-      {/* Category ratings */}
-      <div className="mt-6 grid grid-cols-2 gap-3 text-sm">
-        <Rating emoji="🍗" label="Chicken" value={chickenRating} />
-
-        <Rating emoji="🌶️" label="Sambal & Kacang" value={sambalKacangRating} />
-
-        <Rating emoji="🥬" label="Sayur" value={sayurRating} />
-
-        <Rating emoji="🍳" label="Sides" value={sidesRating} />
-      </div>
-
-      {/* Details link */}
-      <div className="mt-5 border-t pt-4">
-        <p className="text-sm font-medium text-gray-500">View shop details →</p>
+        {/* Details link */}
+        <div className="mt-5 border-t pt-4">
+          <p className="text-sm font-medium text-gray-500">
+            View shop details →
+          </p>
+        </div>
       </div>
     </Link>
   );

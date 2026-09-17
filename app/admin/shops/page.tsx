@@ -93,6 +93,13 @@ export default async function ShopsPage() {
                         Edit
                       </Link>
 
+                      <Link
+                        href={`/admin/shops/${shop.id}`}
+                        className="rounded-lg bg-black px-4 py-2 text-sm font-medium text-white"
+                      >
+                        Manage
+                      </Link>
+
                       {shop.is_active && (
                         <DeactivateShopButton shopId={shop.id} />
                       )}

@@ -29,6 +29,14 @@ export default async function ShopPage({ params }: ShopPageProps) {
     .eq("id", id)
     .maybeSingle();
 
+  // Get primary shop photo
+  const { data: primaryPhoto } = await supabase
+    .from("photos")
+    .select("image_url, caption")
+    .eq("shop_id", id)
+    .eq("is_primary", true)
+    .maybeSingle();
+
   // Get all rankings so we can determine this shop's position
   const { data: allRankings } = await supabase
     .from("shop_rankings")
@@ -85,47 +93,72 @@ export default async function ShopPage({ params }: ShopPageProps) {
 
       {/* Shop header */}
       <section className="mx-auto max-w-5xl px-6 py-10">
-        <div className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            {rank && (
-              <p className="mb-3 text-sm font-bold uppercase tracking-wide text-gray-500">
-                Ranked #{rank}
-              </p>
-            )}
+        <div className="overflow-hidden rounded-3xl border bg-white shadow-sm">
+          {/* Shop photo */}
+          {primaryPhoto?.image_url ? (
+            <div className="aspect-[16/7] w-full overflow-hidden bg-gray-100">
+              <img
+                src={primaryPhoto.image_url}
+                alt={primaryPhoto.caption || shop.name}
+                className="h-full w-full object-cover"
+              />
+            </div>
+          ) : (
+            <div className="flex aspect-[16/7] w-full items-center justify-center bg-gray-100">
+              <div className="text-center">
+                <div className="text-6xl">🍗</div>
+                <p className="mt-3 text-sm text-gray-400">No photo available</p>
+              </div>
+            </div>
+          )}
 
-            <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl">
-              {shop.name}
-            </h1>
+          {/* Shop information */}
+          <div className="p-6 sm:p-8">
+            <div className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
+              <div>
+                {rank && (
+                  <p className="mb-3 text-sm font-bold uppercase tracking-wide text-gray-500">
+                    Ranked #{rank}
+                  </p>
+                )}
 
-            {(shop.city || shop.state) && (
-              <p className="mt-3 text-gray-500">
-                {[shop.city, shop.state].filter(Boolean).join(", ")}
-              </p>
-            )}
+                <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl">
+                  {shop.name}
+                </h1>
 
-            {shop.address && (
-              <p className="mt-1 text-gray-500">{shop.address}</p>
-            )}
+                {(shop.city || shop.state) && (
+                  <p className="mt-3 text-gray-500">
+                    {[shop.city, shop.state].filter(Boolean).join(", ")}
+                  </p>
+                )}
 
-            {shop.description && (
-              <p className="mt-5 max-w-2xl text-gray-600">{shop.description}</p>
-            )}
-          </div>
+                {shop.address && (
+                  <p className="mt-1 text-gray-500">{shop.address}</p>
+                )}
 
-          {/* Overall score */}
-          <div className="shrink-0 rounded-2xl border bg-white px-8 py-6 text-center shadow-sm">
-            <p className="text-sm font-medium text-gray-500">Overall</p>
+                {shop.description && (
+                  <p className="mt-5 max-w-2xl text-gray-600">
+                    {shop.description}
+                  </p>
+                )}
+              </div>
 
-            <p className="mt-1 text-5xl font-extrabold">
-              {ranking?.overall_rating?.toFixed(2) ?? "—"}
-            </p>
+              {/* Overall score */}
+              <div className="shrink-0 rounded-2xl border bg-gray-50 px-8 py-6 text-center">
+                <p className="text-sm font-medium text-gray-500">Overall</p>
 
-            <p className="text-sm text-gray-400">/ 10</p>
+                <p className="mt-1 text-5xl font-extrabold">
+                  {ranking?.overall_rating?.toFixed(2) ?? "—"}
+                </p>
 
-            <p className="mt-3 text-xs text-gray-400">
-              {ranking?.visit_count ?? 0}{" "}
-              {ranking?.visit_count === 1 ? "visit" : "visits"}
-            </p>
+                <p className="text-sm text-gray-400">/ 10</p>
+
+                <p className="mt-3 text-xs text-gray-400">
+                  {ranking?.visit_count ?? 0}{" "}
+                  {ranking?.visit_count === 1 ? "visit" : "visits"}
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
