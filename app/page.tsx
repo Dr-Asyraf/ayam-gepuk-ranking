@@ -1,5 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
-import RankingCard from "@/components/rankings/RankingCard";
+import RankingList from "@/components/rankings/RankingList";
 
 export default async function Home() {
   const supabase = await createClient();
@@ -65,24 +65,7 @@ export default async function Home() {
             </p>
           </div>
         ) : (
-          <div className="space-y-5">
-            {shops.map((shop, index) => (
-              <RankingCard
-                key={shop.id}
-                rank={index + 1}
-                id={shop.id}
-                name={shop.name}
-                city={shop.city}
-                state={shop.state}
-                overallRating={Number(shop.overall_rating)}
-                chickenRating={Number(shop.chicken_rating)}
-                sambalKacangRating={Number(shop.sambal_kacang_rating)}
-                sayurRating={Number(shop.sayur_rating)}
-                sidesRating={Number(shop.sides_rating)}
-                visitCount={Number(shop.visit_count)}
-              />
-            ))}
-          </div>
+          <RankingList shops={shops} />
         )}
       </section>
 
