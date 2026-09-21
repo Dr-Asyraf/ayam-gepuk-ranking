@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import ShopForm from "@/components/admin/ShopForm";
+import AdminNav from "@/components/admin/AdminNav";
 
 type EditShopPageProps = {
   params: Promise<{
@@ -26,16 +27,16 @@ export default async function EditShopPage({
   }
 
   return (
-    <main className="mx-auto max-w-2xl p-8">
-      <h1 className="mb-2 text-3xl font-bold">
-        Edit Shop
-      </h1>
+    <main className="min-h-screen">
+      <AdminNav />
 
-      <p className="mb-8 text-gray-500">
-        Update the shop information.
-      </p>
+      <div className="mx-auto max-w-2xl p-8">
+        <h1 className="mb-2 text-3xl font-bold">Edit Shop</h1>
 
-      <ShopForm shop={shop} />
+        <p className="mb-8 text-gray-500">Update the shop information.</p>
+
+        <ShopForm shop={shop} />
+      </div>
     </main>
   );
 }

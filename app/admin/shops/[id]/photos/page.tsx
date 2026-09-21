@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 
 import { createClient } from "@/lib/supabase/server";
 import PhotoManager from "@/components/admin/PhotoManager";
+import AdminNav from "@/components/admin/AdminNav";
 
 type PageProps = {
   params: Promise<{
@@ -39,6 +40,8 @@ export default async function ShopPhotosPage({ params }: PageProps) {
 
   return (
     <main className="min-h-screen bg-gray-50">
+      <AdminNav />
+
       <div className="mx-auto max-w-5xl px-6 py-10">
         <Link
           href="/admin/shops"

@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 
 import EditShopForm from "@/components/admin/EditShopForm";
-import PhotoUploader from "@/components/admin/PhotoUploader";
+import AdminNav from "@/components/admin/AdminNav";
 
 type PageProps = {
   params: Promise<{
@@ -29,6 +29,8 @@ export default async function AdminShopPage({ params }: PageProps) {
 
   return (
     <main className="min-h-screen bg-gray-50">
+      <AdminNav />
+
       <div className="mx-auto max-w-3xl px-6 py-10">
         {/* Back */}
         <Link
@@ -61,9 +63,20 @@ export default async function AdminShopPage({ params }: PageProps) {
           />
         </div>
 
-        {/* Photo */}
-        <div className="mt-6">
-          <PhotoUploader shopId={shop.id} />
+        {/* Photos */}
+        <div className="mt-6 rounded-2xl border bg-white p-6">
+          <h2 className="text-lg font-bold">Photos</h2>
+
+          <p className="mt-1 text-sm text-gray-500">
+            Upload, set a primary photo and delete photos.
+          </p>
+
+          <Link
+            href={`/admin/shops/${shop.id}/photos`}
+            className="mt-4 inline-block rounded-xl bg-black px-5 py-3 text-sm font-semibold text-white hover:bg-gray-800"
+          >
+            Manage photos
+          </Link>
         </div>
       </div>
     </main>

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import LogoutButton from "@/components/admin/LogoutButton";
+import AdminNav from "@/components/admin/AdminNav";
 
 export default async function AdminPage() {
   const supabase = await createClient();
@@ -23,7 +24,10 @@ export default async function AdminPage() {
   }
 
   return (
-    <main className="mx-auto max-w-6xl p-8">
+    <main className="min-h-screen">
+      <AdminNav />
+
+      <div className="mx-auto max-w-6xl p-8">
       <div className="mb-8 flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold">Admin Dashboard</h1>
@@ -147,6 +151,7 @@ export default async function AdminPage() {
           </div>
         )}
       </section>
+    </div>
     </main>
   );
 }

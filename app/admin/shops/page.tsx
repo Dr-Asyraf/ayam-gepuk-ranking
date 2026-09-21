@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import DeactivateShopButton from "@/components/admin/DeactivateShopButton";
+import AdminNav from "@/components/admin/AdminNav";
 
 export default async function ShopsPage() {
   const supabase = await createClient();
@@ -23,7 +24,10 @@ export default async function ShopsPage() {
   }
 
   return (
-    <main className="mx-auto max-w-6xl p-8">
+    <main className="min-h-screen">
+      <AdminNav />
+
+      <div className="mx-auto max-w-6xl p-8">
       <div className="mb-8 flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold">Manage Shops</h1>
@@ -129,6 +133,7 @@ export default async function ShopsPage() {
           </Link>
         </div>
       )}
+    </div>
     </main>
   );
 }

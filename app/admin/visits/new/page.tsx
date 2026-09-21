@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import ReviewForm from '@/components/admin/ReviewForm'
+import AdminNav from '@/components/admin/AdminNav'
 
 export default async function NewReviewPage() {
   const supabase = await createClient()
@@ -26,16 +27,18 @@ export default async function NewReviewPage() {
   }
 
   return (
-    <main className="mx-auto max-w-2xl p-8">
-      <h1 className="mb-2 text-3xl font-bold">
-        Add Review
-      </h1>
+    <main className="min-h-screen">
+      <AdminNav />
 
-      <p className="mb-8 text-gray-500">
-        Add your latest ayam gepuk experience.
-      </p>
+      <div className="mx-auto max-w-2xl p-8">
+        <h1 className="mb-2 text-3xl font-bold">Add Review</h1>
 
-      <ReviewForm shops={shops ?? []} />
+        <p className="mb-8 text-gray-500">
+          Add your latest ayam gepuk experience.
+        </p>
+
+        <ReviewForm shops={shops ?? []} />
+      </div>
     </main>
   )
 }

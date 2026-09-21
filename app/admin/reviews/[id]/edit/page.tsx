@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 
 import { createClient } from "@/lib/supabase/server";
 import EditReviewForm from "@/components/admin/EditReviewForm";
+import AdminNav from "@/components/admin/AdminNav";
 
 type PageProps = {
   params: Promise<{
@@ -66,6 +67,8 @@ export default async function EditReviewPage({ params }: PageProps) {
 
   return (
     <main className="min-h-screen bg-gray-50">
+      <AdminNav />
+
       <div className="mx-auto max-w-3xl px-6 py-10">
         <Link
           href="/admin/reviews"

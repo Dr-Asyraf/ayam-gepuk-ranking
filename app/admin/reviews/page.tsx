@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import DeleteReviewButton from "@/components/admin/DeleteReviewButton";
+import AdminNav from "@/components/admin/AdminNav";
 
 export default async function AdminReviewsPage() {
   const supabase = await createClient();
@@ -50,6 +51,8 @@ export default async function AdminReviewsPage() {
 
   return (
     <main className="min-h-screen bg-gray-50">
+      <AdminNav />
+
       <div className="mx-auto max-w-5xl px-6 py-10">
         {/* Header */}
         <div className="flex items-start justify-between gap-4">
