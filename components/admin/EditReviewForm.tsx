@@ -25,7 +25,7 @@ const sidesOptions = [
   "Tauhu",
   "Telur",
   "Pedal",
-  "Enoki/Mushroom Goreng",
+  "Enoki / Mushroom Goreng",
 ];
 
 export default function EditReviewForm({ visit }: EditReviewFormProps) {

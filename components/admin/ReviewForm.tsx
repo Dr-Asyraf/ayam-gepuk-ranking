@@ -14,9 +14,19 @@ type ReviewFormProps = {
   shops: Shop[];
 };
 
-const vegetables = ["Kubis", "Kangkung", "Bayam Goreng"];
+type Vegetable = "Kubis" | "Kangkung" | "Bayam Goreng";
 
-const sides = ["Tempe", "Tauhu", "Telur", "Pedal", "Enoki / Mushroom Goreng"];
+type Side = "Tempe" | "Tauhu" | "Telur" | "Pedal" | "Enoki / Mushroom Goreng";
+
+const vegetables: Vegetable[] = ["Kubis", "Kangkung", "Bayam Goreng"];
+
+const sides: Side[] = [
+  "Tempe",
+  "Tauhu",
+  "Telur",
+  "Pedal",
+  "Enoki / Mushroom Goreng",
+];
 
 export default function ReviewForm({ shops }: ReviewFormProps) {
   const [shopId, setShopId] = useState("");
@@ -27,9 +37,10 @@ export default function ReviewForm({ shops }: ReviewFormProps) {
   const [sayur, setSayur] = useState("");
   const [sidesRating, setSidesRating] = useState("");
 
-  const [selectedVegetables, setSelectedVegetables] = useState<string[]>([]);
+  const [selectedVegetables, setSelectedVegetables] =
+    useState<Vegetable[]>([]);
 
-  const [selectedSides, setSelectedSides] = useState<string[]>([]);
+  const [selectedSides, setSelectedSides] = useState<Side[]>([]);
 
   const [comments, setComments] = useState("");
 
@@ -53,7 +64,7 @@ export default function ReviewForm({ shops }: ReviewFormProps) {
 
   const overall = calculateOverall();
 
-  const toggleVegetable = (vegetable: string) => {
+  const toggleVegetable = (vegetable: Vegetable) => {
     setSelectedVegetables((current) =>
       current.includes(vegetable)
         ? current.filter((item) => item !== vegetable)
@@ -61,7 +72,7 @@ export default function ReviewForm({ shops }: ReviewFormProps) {
     );
   };
 
-  const toggleSide = (side: string) => {
+  const toggleSide = (side: Side) => {
     setSelectedSides((current) =>
       current.includes(side)
         ? current.filter((item) => item !== side)
@@ -84,8 +95,8 @@ export default function ReviewForm({ shops }: ReviewFormProps) {
       sayur: Number(sayur),
       sides: Number(sidesRating),
 
-      vegetables: selectedVegetables as any,
-      sidesAvailable: selectedSides as any,
+      vegetables: selectedVegetables,
+      sidesAvailable: selectedSides,
 
       comments,
     });
