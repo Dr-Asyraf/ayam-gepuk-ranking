@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 
 import { createClient } from "@/lib/supabase/server";
 
@@ -8,6 +9,25 @@ type PageProps = {
     id: string;
   }>;
 };
+
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  const { id } = await params;
+
+  const supabase = await createClient();
+
+  const { data: shop } = await supabase
+    .from("shops")
+    .select("name")
+    .eq("id", id)
+    .eq("is_active", true)
+    .single();
+
+  return {
+    title: shop?.name ?? "Shop not found",
+  };
+}
 
 export default async function ShopPage({ params }: PageProps) {
   const { id } = await params;
