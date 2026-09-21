@@ -100,6 +100,13 @@ export default async function ShopsPage() {
                         Manage
                       </Link>
 
+                      <Link
+                        href={`/admin/shops/${shop.id}/photos`}
+                        className="rounded-lg border px-4 py-2 text-sm font-medium hover:bg-gray-50"
+                      >
+                        Photos
+                      </Link>
+
                       {shop.is_active && (
                         <DeactivateShopButton shopId={shop.id} />
                       )}

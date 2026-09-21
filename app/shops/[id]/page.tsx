@@ -34,7 +34,7 @@ export default async function ShopPage({ params }: PageProps) {
    * Get primary photo
    */
   const { data: primaryPhoto } = await supabase
-    .from("shop_photos")
+    .from("photos")
     .select("image_url, caption")
     .eq("shop_id", id)
     .eq("is_primary", true)
