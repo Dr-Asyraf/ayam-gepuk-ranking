@@ -32,14 +32,14 @@ export default async function ShopsPage() {
         <div>
           <h1 className="text-3xl font-bold">Manage Shops</h1>
 
-          <p className="mt-1 text-gray-500">
+          <p className="mt-1 text-stone-500">
             Add and manage your ayam gepuk shops.
           </p>
         </div>
 
         <Link
           href="/admin/shops/new"
-          className="rounded-lg bg-black px-5 py-3 font-medium text-white"
+          className="rounded-lg bg-orange-600 px-5 py-3 font-medium text-white"
         >
           + Add Shop
         </Link>
@@ -48,7 +48,7 @@ export default async function ShopsPage() {
       {shops && shops.length > 0 ? (
         <div className="overflow-hidden rounded-xl border">
           <table className="w-full">
-            <thead className="bg-gray-50">
+            <thead className="bg-stone-100">
               <tr>
                 <th className="px-4 py-3 text-left">Shop</th>
 
@@ -67,7 +67,7 @@ export default async function ShopsPage() {
                     <div className="font-medium">{shop.name}</div>
 
                     {shop.address && (
-                      <div className="text-sm text-gray-500">
+                      <div className="text-sm text-stone-500">
                         {shop.address}
                       </div>
                     )}
@@ -82,7 +82,7 @@ export default async function ShopsPage() {
                     {shop.is_active ? (
                       <span className="font-medium text-green-600">Active</span>
                     ) : (
-                      <span className="font-medium text-gray-400">
+                      <span className="font-medium text-stone-500">
                         Inactive
                       </span>
                     )}
@@ -99,14 +99,14 @@ export default async function ShopsPage() {
 
                       <Link
                         href={`/admin/shops/${shop.id}`}
-                        className="rounded-lg bg-black px-4 py-2 text-sm font-medium text-white"
+                        className="rounded-lg bg-orange-600 px-4 py-2 text-sm font-medium text-white"
                       >
                         Manage
                       </Link>
 
                       <Link
                         href={`/admin/shops/${shop.id}/photos`}
-                        className="rounded-lg border px-4 py-2 text-sm font-medium hover:bg-gray-50"
+                        className="rounded-lg border px-4 py-2 text-sm font-medium hover:bg-stone-100"
                       >
                         Photos
                       </Link>
@@ -123,7 +123,7 @@ export default async function ShopsPage() {
         </div>
       ) : (
         <div className="rounded-xl border p-8 text-center">
-          <p className="text-gray-500">No shops have been added yet.</p>
+          <p className="text-stone-500">No shops have been added yet.</p>
 
           <Link
             href="/admin/shops/new"

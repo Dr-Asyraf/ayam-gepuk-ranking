@@ -72,7 +72,7 @@ export default function EditShopForm({ shop }: EditShopFormProps) {
     <form onSubmit={handleSubmit} className="rounded-2xl border bg-white p-6">
       <h2 className="text-lg font-bold">Edit Shop</h2>
 
-      <p className="mt-1 text-sm text-gray-500">Update the shop information.</p>
+      <p className="mt-1 text-sm text-stone-500">Update the shop information.</p>
 
       {/* Name */}
       <div className="mt-6">
@@ -85,7 +85,7 @@ export default function EditShopForm({ shop }: EditShopFormProps) {
           type="text"
           value={name}
           onChange={(event) => setName(event.target.value)}
-          className="mt-2 w-full rounded-xl border px-4 py-3 outline-none focus:border-gray-400"
+          className="mt-2 w-full rounded-xl border px-4 py-3 outline-none focus:border-orange-500"
           required
         />
       </div>
@@ -101,7 +101,7 @@ export default function EditShopForm({ shop }: EditShopFormProps) {
           value={address}
           onChange={(event) => setAddress(event.target.value)}
           rows={3}
-          className="mt-2 w-full rounded-xl border px-4 py-3 outline-none focus:border-gray-400"
+          className="mt-2 w-full rounded-xl border px-4 py-3 outline-none focus:border-orange-500"
         />
       </div>
 
@@ -117,7 +117,7 @@ export default function EditShopForm({ shop }: EditShopFormProps) {
             type="text"
             value={city}
             onChange={(event) => setCity(event.target.value)}
-            className="mt-2 w-full rounded-xl border px-4 py-3 outline-none focus:border-gray-400"
+            className="mt-2 w-full rounded-xl border px-4 py-3 outline-none focus:border-orange-500"
           />
         </div>
 
@@ -131,7 +131,7 @@ export default function EditShopForm({ shop }: EditShopFormProps) {
             type="text"
             value={state}
             onChange={(event) => setState(event.target.value)}
-            className="mt-2 w-full rounded-xl border px-4 py-3 outline-none focus:border-gray-400"
+            className="mt-2 w-full rounded-xl border px-4 py-3 outline-none focus:border-orange-500"
           />
         </div>
       </div>
@@ -148,7 +148,7 @@ export default function EditShopForm({ shop }: EditShopFormProps) {
           onChange={(event) => setDescription(event.target.value)}
           rows={4}
           placeholder="Tell people something about this shop..."
-          className="mt-2 w-full rounded-xl border px-4 py-3 outline-none focus:border-gray-400"
+          className="mt-2 w-full rounded-xl border px-4 py-3 outline-none focus:border-orange-500"
         />
       </div>
 
@@ -156,13 +156,13 @@ export default function EditShopForm({ shop }: EditShopFormProps) {
       <button
         type="submit"
         disabled={saving}
-        className="mt-6 rounded-xl bg-black px-5 py-3 text-sm font-semibold text-white transition hover:bg-gray-800 disabled:cursor-not-allowed disabled:opacity-50"
+        className="mt-6 rounded-xl bg-orange-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-orange-700 disabled:cursor-not-allowed disabled:opacity-50"
       >
         {saving ? "Saving..." : "Save Changes"}
       </button>
 
       {/* Message */}
-      {message && <p className="mt-4 text-sm text-gray-600">{message}</p>}
+      {message && <p className="mt-4 text-sm text-stone-600">{message}</p>}
     </form>
   );
 }

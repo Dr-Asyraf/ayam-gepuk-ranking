@@ -15,7 +15,7 @@ export default async function Home() {
     console.error(error);
 
     return (
-      <main className="min-h-screen bg-gray-50 px-6 py-10">
+      <main className="min-h-screen bg-stone-50 px-6 py-10">
         <div className="mx-auto max-w-5xl">
           <h1 className="text-4xl font-bold">Ayam Gepuk Rankings</h1>
 
@@ -26,17 +26,17 @@ export default async function Home() {
   }
 
   return (
-    <main className="min-h-screen bg-gray-50">
+    <main className="min-h-screen bg-stone-50">
       <div className="mx-auto max-w-5xl px-6 py-10">
         {/* Header */}
         <div>
-          <p className="text-sm font-medium uppercase tracking-wide text-gray-400">
-            My Ayam Gepuk Rankings
+          <p className="text-sm font-medium uppercase tracking-wide text-stone-500">
+            Asyraf's Ayam Gepuk Rankings
           </p>
 
           <h1 className="mt-2 text-4xl font-bold">Ayam Gepuk Rankings 🍗</h1>
 
-          <p className="mt-3 text-gray-500">
+          <p className="mt-3 text-stone-500">
             Ranking my favourite ayam gepuk shops based on my visits and
             ratings.
           </p>
@@ -64,7 +64,7 @@ export default async function Home() {
             ))
           ) : (
             <div className="rounded-2xl border bg-white p-10 text-center">
-              <p className="text-gray-500">No ranked shops yet.</p>
+              <p className="text-stone-500">No ranked shops yet.</p>
             </div>
           )}
         </div>

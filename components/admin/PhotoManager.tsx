@@ -265,11 +265,11 @@ export default function PhotoManager({
       <div className="rounded-2xl border bg-white p-6">
         <h2 className="text-lg font-bold">Upload photo</h2>
 
-        <p className="mt-1 text-sm text-gray-500">
+        <p className="mt-1 text-sm text-stone-500">
           JPG, PNG or other image formats. Maximum 5MB.
         </p>
 
-        <label className="mt-5 inline-flex cursor-pointer rounded-xl bg-black px-5 py-3 font-medium text-white hover:bg-gray-800">
+        <label className="mt-5 inline-flex cursor-pointer rounded-xl bg-orange-600 px-5 py-3 font-medium text-white hover:bg-orange-700">
           {uploading ? "Uploading..." : "Choose image"}
 
           <input
@@ -293,7 +293,7 @@ export default function PhotoManager({
 
         {photos.length === 0 ? (
           <div className="mt-4 rounded-2xl border bg-white p-8 text-center">
-            <p className="text-gray-500">No photos yet.</p>
+            <p className="text-stone-500">No photos yet.</p>
           </div>
         ) : (
           <div className="mt-4 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -302,7 +302,7 @@ export default function PhotoManager({
                 key={photo.id}
                 className="overflow-hidden rounded-2xl border bg-white"
               >
-                <div className="aspect-[4/3] overflow-hidden bg-gray-100">
+                <div className="aspect-[4/3] overflow-hidden bg-stone-100">
                   <img
                     src={photo.image_url}
                     alt={photo.caption ?? "Shop photo"}
@@ -312,7 +312,7 @@ export default function PhotoManager({
 
                 <div className="p-4">
                   {photo.is_primary && (
-                    <span className="inline-block rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-700">
+                    <span className="inline-block rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-800">
                       Primary photo
                     </span>
                   )}
@@ -322,7 +322,7 @@ export default function PhotoManager({
                       <button
                         type="button"
                         onClick={() => handleSetPrimary(photo.id)}
-                        className="rounded-lg border px-3 py-2 text-sm font-medium hover:bg-gray-50"
+                        className="rounded-lg border px-3 py-2 text-sm font-medium hover:bg-stone-100"
                       >
                         Set primary
                       </button>

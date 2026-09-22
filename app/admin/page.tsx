@@ -32,20 +32,20 @@ export default async function AdminPage() {
         <div>
           <h1 className="text-3xl font-bold">Admin Dashboard</h1>
 
-          <p className="mt-1 text-gray-500">Manage your ayam gepuk rankings.</p>
+          <p className="mt-1 text-stone-500">Manage your ayam gepuk rankings.</p>
         </div>
 
         <div className="flex items-center gap-3">
           <Link
             href="/admin/shops"
-            className="rounded-lg border px-5 py-3 font-medium hover:bg-gray-50"
+            className="rounded-lg border px-5 py-3 font-medium hover:bg-stone-50"
           >
             Manage Shops
           </Link>
 
           <Link
             href="/admin/visits/new"
-            className="rounded-lg bg-black px-5 py-3 font-medium text-white"
+            className="rounded-lg bg-orange-600 px-5 py-3 font-medium text-white"
           >
             + Add Review
           </Link>
@@ -56,13 +56,13 @@ export default async function AdminPage() {
 
       <div className="mb-8 grid gap-4 sm:grid-cols-3">
         <div className="rounded-xl border p-6">
-          <p className="text-sm text-gray-500">Shops</p>
+          <p className="text-sm text-stone-500">Shops</p>
 
           <p className="mt-2 text-3xl font-bold">{rankings?.length ?? 0}</p>
         </div>
 
         <div className="rounded-xl border p-6">
-          <p className="text-sm text-gray-500">Ranked Shops</p>
+          <p className="text-sm text-stone-500">Ranked Shops</p>
 
           <p className="mt-2 text-3xl font-bold">
             {rankings?.filter((shop) => shop.overall_rating !== null).length ??
@@ -71,7 +71,7 @@ export default async function AdminPage() {
         </div>
 
         <div className="rounded-xl border p-6">
-          <p className="text-sm text-gray-500">Top Rating</p>
+          <p className="text-sm text-stone-500">Top Rating</p>
 
           <p className="mt-2 text-3xl font-bold">
             {rankings?.[0]?.overall_rating ?? "-"}
@@ -85,7 +85,7 @@ export default async function AdminPage() {
         {rankings && rankings.length > 0 ? (
           <div className="overflow-hidden rounded-xl border">
             <table className="w-full">
-              <thead className="bg-gray-50">
+              <thead className="bg-stone-100">
                 <tr>
                   <th className="px-4 py-3 text-left">Rank</th>
 
@@ -113,7 +113,7 @@ export default async function AdminPage() {
                     <td className="px-4 py-4">
                       <div className="font-medium">{shop.name}</div>
 
-                      <div className="text-sm text-gray-500">
+                      <div className="text-sm text-stone-500">
                         {shop.city}, {shop.state}
                       </div>
                     </td>
@@ -140,7 +140,7 @@ export default async function AdminPage() {
           </div>
         ) : (
           <div className="rounded-xl border p-8 text-center">
-            <p className="text-gray-500">No ranked shops yet.</p>
+            <p className="text-stone-500">No ranked shops yet.</p>
 
             <Link
               href="/admin/visits/new"

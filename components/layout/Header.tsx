@@ -17,7 +17,7 @@ export default function Header() {
         <nav className="flex items-center gap-5 text-sm font-medium">
           <Link
             href="/"
-            className="text-gray-600 transition hover:text-gray-900"
+            className="text-stone-600 transition hover:text-stone-900"
           >
             Rankings
           </Link>

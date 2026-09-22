@@ -233,8 +233,8 @@ export default function ReviewForm({ shops }: ReviewFormProps) {
 
       {/* OVERALL */}
 
-      <div className="rounded-xl bg-gray-100 p-6">
-        <p className="text-sm text-gray-500">Overall rating</p>
+      <div className="rounded-xl bg-stone-100 p-6">
+        <p className="text-sm text-stone-500">Overall rating</p>
 
         <p className="text-4xl font-bold">
           {overall !== null ? `${overall.toFixed(2)} / 10` : "—"}
@@ -250,7 +250,7 @@ export default function ReviewForm({ shops }: ReviewFormProps) {
       <button
         type="submit"
         disabled={isSaving}
-        className="w-full rounded-lg bg-black px-6 py-3 font-medium text-white disabled:opacity-50"
+        className="w-full rounded-lg bg-orange-600 px-6 py-3 font-medium text-white disabled:opacity-50"
       >
         {isSaving ? "Saving..." : "Save Review"}
       </button>

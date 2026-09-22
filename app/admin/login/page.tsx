@@ -35,11 +35,11 @@ export default function LoginPage() {
   };
 
   return (
-    <main className="flex min-h-screen items-center justify-center p-8">
-      <div className="w-full max-w-md">
+    <main className="flex min-h-screen items-center justify-center bg-stone-50 p-8">
+      <div className="w-full max-w-md rounded-2xl border bg-white p-8 shadow-sm">
         <h1 className="mb-2 text-3xl font-bold">Admin Login</h1>
 
-        <p className="mb-8 text-gray-500">
+        <p className="mb-8 text-stone-500">
           Sign in to manage your ayam gepuk rankings.
         </p>
 
@@ -79,7 +79,7 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full rounded-lg bg-black px-4 py-3 font-medium text-white disabled:opacity-50"
+            className="w-full rounded-lg bg-orange-600 px-4 py-3 font-medium text-white disabled:opacity-50"
           >
             {loading ? "Signing in..." : "Sign in"}
           </button>

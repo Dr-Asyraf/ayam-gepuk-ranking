@@ -39,7 +39,7 @@ export default async function AdminReviewsPage() {
     console.error("FAILED TO LOAD REVIEWS:", error);
 
     return (
-      <main className="min-h-screen bg-gray-50">
+      <main className="min-h-screen bg-stone-50">
         <div className="mx-auto max-w-5xl px-6 py-10">
           <h1 className="text-3xl font-bold">Reviews</h1>
 
@@ -50,7 +50,7 @@ export default async function AdminReviewsPage() {
   }
 
   return (
-    <main className="min-h-screen bg-gray-50">
+    <main className="min-h-screen bg-stone-50">
       <AdminNav />
 
       <div className="mx-auto max-w-5xl px-6 py-10">
@@ -59,21 +59,21 @@ export default async function AdminReviewsPage() {
           <div>
             <Link
               href="/admin"
-              className="text-sm font-medium text-gray-500 hover:text-gray-900"
+              className="text-sm font-medium text-stone-500 hover:text-stone-900"
             >
               ← Admin Dashboard
             </Link>
 
             <h1 className="mt-4 text-3xl font-bold">Reviews</h1>
 
-            <p className="mt-1 text-gray-500">
+            <p className="mt-1 text-stone-500">
               View your Ayam Gepuk review history.
             </p>
           </div>
 
           <Link
             href="/admin/visits/new"
-            className="rounded-xl bg-black px-5 py-3 text-sm font-semibold text-white hover:bg-gray-800"
+            className="rounded-xl bg-orange-600 px-5 py-3 text-sm font-semibold text-white hover:bg-orange-700"
           >
             Add Review
           </Link>
@@ -110,7 +110,7 @@ export default async function AdminReviewsPage() {
                         {shop?.name ?? "Unknown shop"}
                       </h2>
 
-                      <p className="mt-1 text-sm text-gray-500">
+                      <p className="mt-1 text-sm text-stone-500">
                         Visited on {formatDate(visit.visited_at)}
                       </p>
                     </div>
@@ -119,7 +119,7 @@ export default async function AdminReviewsPage() {
                       <div className="text-right">
                         <p className="text-3xl font-bold">{overallRating}</p>
 
-                        <p className="text-sm text-gray-400">/ 10</p>
+                        <p className="text-sm text-stone-400">/ 10</p>
                       </div>
                     )}
                   </div>
@@ -149,7 +149,7 @@ export default async function AdminReviewsPage() {
                   {visit.visit_vegetables &&
                     visit.visit_vegetables.length > 0 && (
                       <div className="mt-5">
-                        <p className="text-sm font-medium text-gray-500">
+                        <p className="text-sm font-medium text-stone-500">
                           Vegetables
                         </p>
 
@@ -157,7 +157,7 @@ export default async function AdminReviewsPage() {
                           {visit.visit_vegetables.map((item) => (
                             <span
                               key={item.vegetable}
-                              className="rounded-full bg-green-50 px-3 py-1 text-sm text-green-700"
+                              className="rounded-full bg-green-100 px-3 py-1 text-sm text-green-800"
                             >
                               {item.vegetable}
                             </span>
@@ -169,13 +169,13 @@ export default async function AdminReviewsPage() {
                   {/* Sides */}
                   {visit.visit_sides && visit.visit_sides.length > 0 && (
                     <div className="mt-5">
-                      <p className="text-sm font-medium text-gray-500">Sides</p>
+                      <p className="text-sm font-medium text-stone-500">Sides</p>
 
                       <div className="mt-2 flex flex-wrap gap-2">
                         {visit.visit_sides.map((item) => (
                           <span
                             key={item.side}
-                            className="rounded-full bg-orange-50 px-3 py-1 text-sm text-orange-700"
+                            className="rounded-full bg-amber-100 px-3 py-1 text-sm text-amber-800"
                           >
                             {item.side}
                           </span>
@@ -187,11 +187,11 @@ export default async function AdminReviewsPage() {
                   {/* Comments */}
                   {visit.comments && (
                     <div className="mt-5 border-t pt-5">
-                      <p className="text-sm font-medium text-gray-500">
+                      <p className="text-sm font-medium text-stone-500">
                         Comments
                       </p>
 
-                      <p className="mt-2 whitespace-pre-line text-gray-700">
+                      <p className="mt-2 whitespace-pre-line text-stone-700">
                         {visit.comments}
                       </p>
                     </div>
@@ -201,7 +201,7 @@ export default async function AdminReviewsPage() {
                   <div className="mt-6 flex gap-3 border-t pt-5">
                     <Link
                       href={`/admin/reviews/${visit.id}/edit`}
-                      className="rounded-lg border px-4 py-2 text-sm font-medium hover:bg-gray-50"
+                      className="rounded-lg border px-4 py-2 text-sm font-medium hover:bg-stone-50"
                     >
                       Edit
                     </Link>
@@ -213,11 +213,11 @@ export default async function AdminReviewsPage() {
             })
           ) : (
             <div className="rounded-2xl border bg-white p-10 text-center">
-              <p className="text-gray-500">No reviews yet.</p>
+              <p className="text-stone-500">No reviews yet.</p>
 
               <Link
                 href="/admin/visits/new"
-                className="mt-4 inline-block rounded-xl bg-black px-5 py-3 text-sm font-semibold text-white"
+                className="mt-4 inline-block rounded-xl bg-orange-600 px-5 py-3 text-sm font-semibold text-white"
               >
                 Add your first review
               </Link>
@@ -249,15 +249,15 @@ function Rating({
   value: number | string;
 }) {
   return (
-    <div className="rounded-xl bg-gray-50 p-3">
-      <p className="text-sm text-gray-500">
+    <div className="rounded-xl bg-stone-50 p-3">
+      <p className="text-sm text-stone-500">
         {emoji} {label}
       </p>
 
       <p className="mt-1 font-bold">
         {Number(value).toFixed(2)}
 
-        <span className="font-normal text-gray-400"> / 10</span>
+        <span className="font-normal text-stone-400"> / 10</span>
       </p>
     </div>
   );

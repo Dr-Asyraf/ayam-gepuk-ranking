@@ -171,7 +171,7 @@ export default function ShopForm({ shop }: ShopFormProps) {
         <button
           type="submit"
           disabled={loading}
-          className="rounded-lg bg-black px-5 py-3 font-medium text-white disabled:opacity-50"
+          className="rounded-lg bg-orange-600 px-5 py-3 font-medium text-white disabled:opacity-50"
         >
           {loading ? "Saving..." : isEditing ? "Save Changes" : "Add Shop"}
         </button>

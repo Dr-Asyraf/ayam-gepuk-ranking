@@ -31,12 +31,12 @@ export default function RankingCard({
 }: RankingCardProps) {
   const rankStyle =
     rank === 1
-      ? "border-yellow-300 bg-yellow-50"
+      ? "border-amber-300 bg-amber-50"
       : rank === 2
-        ? "border-gray-300 bg-gray-50"
+        ? "border-stone-300 bg-stone-50"
         : rank === 3
           ? "border-orange-300 bg-orange-50"
-          : "border-gray-200 bg-white";
+          : "border-stone-200 bg-white";
 
   const rankEmoji =
     rank === 1 ? "🥇" : rank === 2 ? "🥈" : rank === 3 ? "🥉" : `#${rank}`;
@@ -48,7 +48,7 @@ export default function RankingCard({
     >
       {/* Image */}
       {imageUrl ? (
-        <div className="aspect-[16/7] w-full overflow-hidden bg-gray-100">
+        <div className="aspect-[16/7] w-full overflow-hidden bg-stone-100">
           <img
             src={imageUrl}
             alt={name}
@@ -56,11 +56,11 @@ export default function RankingCard({
           />
         </div>
       ) : (
-        <div className="flex aspect-[16/7] w-full items-center justify-center bg-gray-100">
+        <div className="flex aspect-[16/7] w-full items-center justify-center bg-stone-100">
           <div className="text-center">
             <div className="text-5xl">🍗</div>
 
-            <p className="mt-2 text-sm text-gray-400">No photo available</p>
+            <p className="mt-2 text-sm text-stone-500">No photo available</p>
           </div>
         </div>
       )}
@@ -82,12 +82,12 @@ export default function RankingCard({
               <h2 className="text-xl font-bold">{name}</h2>
 
               {(city || state) && (
-                <p className="mt-1 text-sm text-gray-500">
+                <p className="mt-1 text-sm text-stone-500">
                   {[city, state].filter(Boolean).join(", ")}
                 </p>
               )}
 
-              <p className="mt-1 text-sm text-gray-500">
+              <p className="mt-1 text-sm text-stone-500">
                 {visitCount} {visitCount === 1 ? "visit" : "visits"}
               </p>
             </div>
@@ -97,7 +97,7 @@ export default function RankingCard({
           <div className="text-right">
             <p className="text-4xl font-bold">{overallRating.toFixed(2)}</p>
 
-            <p className="text-sm text-gray-400">/ 10</p>
+            <p className="text-sm text-stone-500">/ 10</p>
           </div>
         </div>
 
@@ -118,7 +118,7 @@ export default function RankingCard({
 
         {/* Details link */}
         <div className="mt-5 border-t pt-4">
-          <p className="text-sm font-medium text-gray-500">
+          <p className="text-sm font-medium text-stone-500">
             View shop details →
           </p>
         </div>
@@ -138,13 +138,13 @@ function Rating({
 }) {
   return (
     <div className="rounded-xl bg-white/80 p-3">
-      <p className="text-gray-500">
+      <p className="text-stone-500">
         {emoji} {label}
       </p>
 
       <p className="mt-1 font-bold">
         {value.toFixed(2)}
-        <span className="font-normal text-gray-400"> / 10</span>
+        <span className="font-normal text-stone-500"> / 10</span>
       </p>
     </div>
   );

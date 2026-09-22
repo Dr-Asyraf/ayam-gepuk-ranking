@@ -269,13 +269,13 @@ export default function EditReviewForm({ visit }: EditReviewFormProps) {
       <div className="mt-6">
         <p className="text-sm font-medium">🥬 Vegetables</p>
 
-        <p className="mt-1 text-sm text-gray-500">Select one or more.</p>
+        <p className="mt-1 text-sm text-stone-500">Select one or more.</p>
 
         <div className="mt-3 space-y-2">
           {vegetablesOptions.map((vegetable) => (
             <label
               key={vegetable}
-              className="flex cursor-pointer items-center gap-3 rounded-xl border p-3 hover:bg-gray-50"
+              className="flex cursor-pointer items-center gap-3 rounded-xl border p-3 hover:bg-stone-100"
             >
               <input
                 type="checkbox"
@@ -312,7 +312,7 @@ export default function EditReviewForm({ visit }: EditReviewFormProps) {
       <div className="mt-6">
         <p className="text-sm font-medium">🍳 Sides</p>
 
-        <p className="mt-1 text-sm text-gray-500">
+        <p className="mt-1 text-sm text-stone-500">
           Select the sides you ordered.
         </p>
 
@@ -320,7 +320,7 @@ export default function EditReviewForm({ visit }: EditReviewFormProps) {
           {sidesOptions.map((side) => (
             <label
               key={side}
-              className="flex cursor-pointer items-center gap-3 rounded-xl border p-3 hover:bg-gray-50"
+              className="flex cursor-pointer items-center gap-3 rounded-xl border p-3 hover:bg-stone-100"
             >
               <input
                 type="checkbox"
@@ -354,13 +354,13 @@ export default function EditReviewForm({ visit }: EditReviewFormProps) {
       <button
         type="submit"
         disabled={saving}
-        className="mt-8 w-full rounded-xl bg-black px-5 py-3 font-semibold text-white hover:bg-gray-800 disabled:cursor-not-allowed disabled:opacity-50"
+        className="mt-8 w-full rounded-xl bg-orange-600 px-5 py-3 font-semibold text-white hover:bg-orange-700 disabled:cursor-not-allowed disabled:opacity-50"
       >
         {saving ? "Saving..." : "Save Changes"}
       </button>
 
       {message && (
-        <p className="mt-4 text-center text-sm text-gray-600">{message}</p>
+        <p className="mt-4 text-center text-sm text-stone-600">{message}</p>
       )}
     </form>
   );

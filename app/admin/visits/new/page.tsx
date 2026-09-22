@@ -33,7 +33,7 @@ export default async function NewReviewPage() {
       <div className="mx-auto max-w-2xl p-8">
         <h1 className="mb-2 text-3xl font-bold">Add Review</h1>
 
-        <p className="mb-8 text-gray-500">
+        <p className="mb-8 text-stone-500">
           Add your latest ayam gepuk experience.
         </p>
 
