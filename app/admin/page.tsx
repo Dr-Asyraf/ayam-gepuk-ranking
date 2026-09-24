@@ -11,6 +11,11 @@ export default async function AdminPage() {
     .select("*")
     .order("overall_rating", { ascending: false });
 
+  const { count: totalShops } = await supabase
+    .from("shops")
+    .select("id", { count: "exact", head: true })
+    .eq("is_active", true);
+
   if (error) {
     console.error(error);
 
@@ -56,9 +61,9 @@ export default async function AdminPage() {
 
       <div className="mb-8 grid gap-4 sm:grid-cols-3">
         <div className="rounded-xl border p-6">
-          <p className="text-sm text-stone-500">Shops</p>
+          <p className="text-sm text-stone-500">Active Shops</p>
 
-          <p className="mt-2 text-3xl font-bold">{rankings?.length ?? 0}</p>
+          <p className="mt-2 text-3xl font-bold">{totalShops ?? 0}</p>
         </div>
 
         <div className="rounded-xl border p-6">

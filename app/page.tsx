@@ -31,10 +31,10 @@ export default async function Home() {
         {/* Header */}
         <div>
           <p className="text-sm font-medium uppercase tracking-wide text-stone-500">
-            One Man's Search For The Best Gepuk
+            One Man&apos;s Search For The Best Gepuk
           </p>
 
-          <h1 className="mt-2 text-4xl font-bold">Asyraf's Ayam Gepuk Rankings 🍗</h1>
+          <h1 className="mt-2 text-4xl font-bold">Asyraf&apos;s Ayam Gepuk Rankings 🍗</h1>
 
           <p className="mt-3 text-stone-500">
             Ranking my favourite ayam gepuk shops based on my visits and
