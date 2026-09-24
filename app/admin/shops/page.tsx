@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import DeactivateShopButton from "@/components/admin/DeactivateShopButton";
+import ActivateShopButton from "@/components/admin/ActivateShopButton";
 import AdminNav from "@/components/admin/AdminNav";
 
 export default async function ShopsPage() {
@@ -111,8 +112,10 @@ export default async function ShopsPage() {
                         Photos
                       </Link>
 
-                      {shop.is_active && (
+                      {shop.is_active ? (
                         <DeactivateShopButton shopId={shop.id} />
+                      ) : (
+                        <ActivateShopButton shopId={shop.id} />
                       )}
                     </div>
                   </td>
