@@ -33,14 +33,14 @@ export default async function AdminPage() {
       <AdminNav />
 
       <div className="mx-auto max-w-6xl p-8">
-      <div className="mb-8 flex items-center justify-between">
+      <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
         <div>
           <h1 className="text-3xl font-bold">Admin Dashboard</h1>
 
           <p className="mt-1 text-stone-500">Manage your ayam gepuk rankings.</p>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-3">
           <Link
             href="/admin/shops"
             className="rounded-lg border px-5 py-3 font-medium hover:bg-stone-50"
@@ -88,8 +88,8 @@ export default async function AdminPage() {
         <h2 className="mb-4 text-xl font-bold">Current Rankings</h2>
 
         {rankings && rankings.length > 0 ? (
-          <div className="overflow-hidden rounded-xl border">
-            <table className="w-full">
+          <div className="overflow-x-auto rounded-xl border">
+            <table className="w-full min-w-[760px]">
               <thead className="bg-stone-100">
                 <tr>
                   <th className="px-4 py-3 text-left">Rank</th>

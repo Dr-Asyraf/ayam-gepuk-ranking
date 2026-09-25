@@ -29,7 +29,7 @@ export default async function ShopsPage() {
       <AdminNav />
 
       <div className="mx-auto max-w-6xl p-8">
-      <div className="mb-8 flex items-center justify-between">
+      <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
         <div>
           <h1 className="text-3xl font-bold">Manage Shops</h1>
 
@@ -47,8 +47,8 @@ export default async function ShopsPage() {
       </div>
 
       {shops && shops.length > 0 ? (
-        <div className="overflow-hidden rounded-xl border">
-          <table className="w-full">
+        <div className="overflow-x-auto rounded-xl border">
+          <table className="w-full min-w-[720px]">
             <thead className="bg-stone-100">
               <tr>
                 <th className="px-4 py-3 text-left">Shop</th>

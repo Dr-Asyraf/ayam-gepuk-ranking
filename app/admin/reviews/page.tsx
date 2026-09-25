@@ -104,7 +104,7 @@ export default async function AdminReviewsPage() {
               return (
                 <div key={visit.id} className="rounded-2xl border bg-white p-6">
                   {/* Shop + date + overall */}
-                  <div className="flex items-start justify-between gap-4">
+<div className="flex flex-wrap items-start justify-between gap-4">
                     <div>
                       <h2 className="text-xl font-bold">
                         {shop?.name ?? "Unknown shop"}
