@@ -10,7 +10,7 @@ export default async function ShopsPage() {
   const { data: shops, error } = await supabase
     .from("shops")
     .select("*")
-    .order("name");
+    .order("created_at", { ascending: false });
 
   if (error) {
     console.error(error);
