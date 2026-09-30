@@ -69,10 +69,12 @@ export default function EditShopForm({ shop }: EditShopFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="rounded-2xl border bg-white p-6">
+    <form onSubmit={handleSubmit} className="rounded-2xl border bg-white p-6 dark:bg-stone-900">
       <h2 className="text-lg font-bold">Edit Shop</h2>
 
-      <p className="mt-1 text-sm text-stone-500">Update the shop information.</p>
+      <p className="mt-1 text-sm text-stone-500 dark:text-stone-400">
+        Update the shop information.
+      </p>
 
       {/* Name */}
       <div className="mt-6">
@@ -85,7 +87,7 @@ export default function EditShopForm({ shop }: EditShopFormProps) {
           type="text"
           value={name}
           onChange={(event) => setName(event.target.value)}
-          className="mt-2 w-full rounded-xl border px-4 py-3 outline-none focus:border-orange-500"
+          className="mt-2 w-full rounded-xl border px-4 py-3 outline-none focus:border-orange-500 dark:bg-stone-800"
           required
         />
       </div>
@@ -101,7 +103,7 @@ export default function EditShopForm({ shop }: EditShopFormProps) {
           value={address}
           onChange={(event) => setAddress(event.target.value)}
           rows={3}
-          className="mt-2 w-full rounded-xl border px-4 py-3 outline-none focus:border-orange-500"
+          className="mt-2 w-full rounded-xl border px-4 py-3 outline-none focus:border-orange-500 dark:bg-stone-800"
         />
       </div>
 
@@ -117,7 +119,7 @@ export default function EditShopForm({ shop }: EditShopFormProps) {
             type="text"
             value={city}
             onChange={(event) => setCity(event.target.value)}
-            className="mt-2 w-full rounded-xl border px-4 py-3 outline-none focus:border-orange-500"
+            className="mt-2 w-full rounded-xl border px-4 py-3 outline-none focus:border-orange-500 dark:bg-stone-800"
           />
         </div>
 
@@ -131,7 +133,7 @@ export default function EditShopForm({ shop }: EditShopFormProps) {
             type="text"
             value={state}
             onChange={(event) => setState(event.target.value)}
-            className="mt-2 w-full rounded-xl border px-4 py-3 outline-none focus:border-orange-500"
+            className="mt-2 w-full rounded-xl border px-4 py-3 outline-none focus:border-orange-500 dark:bg-stone-800"
           />
         </div>
       </div>
@@ -148,7 +150,7 @@ export default function EditShopForm({ shop }: EditShopFormProps) {
           onChange={(event) => setDescription(event.target.value)}
           rows={4}
           placeholder="Tell people something about this shop..."
-          className="mt-2 w-full rounded-xl border px-4 py-3 outline-none focus:border-orange-500"
+          className="mt-2 w-full rounded-xl border px-4 py-3 outline-none focus:border-orange-500 dark:bg-stone-800"
         />
       </div>
 
@@ -162,7 +164,7 @@ export default function EditShopForm({ shop }: EditShopFormProps) {
       </button>
 
       {/* Message */}
-      {message && <p className="mt-4 text-sm text-stone-600">{message}</p>}
+      {message && <p className="mt-4 text-sm text-stone-600 dark:text-stone-300">{message}</p>}
     </form>
   );
 }

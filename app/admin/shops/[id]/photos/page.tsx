@@ -39,19 +39,19 @@ export default async function ShopPhotosPage({ params }: PageProps) {
   }
 
   return (
-    <main className="min-h-screen bg-stone-50">
+    <main className="min-h-screen bg-stone-50 dark:bg-stone-950">
       <AdminNav />
 
       <div className="mx-auto max-w-5xl px-6 py-10">
         <Link
           href="/admin/shops"
-          className="text-sm font-medium text-stone-500 hover:text-stone-900"
+          className="text-sm font-medium text-stone-500 hover:text-stone-900 dark:text-stone-400 dark:hover:text-white"
         >
           ← Back to shops
         </Link>
 
         <div className="mt-8">
-          <p className="text-sm font-medium uppercase tracking-wide text-stone-500">
+          <p className="text-sm font-medium uppercase tracking-wide text-stone-500 dark:text-stone-400">
             Shop Photos
           </p>
 

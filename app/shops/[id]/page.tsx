@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
 import { createClient } from "@/lib/supabase/server";
+import Header from "@/components/layout/Header";
 
 type PageProps = {
   params: Promise<{
@@ -141,20 +142,22 @@ export default async function ShopPage({ params }: PageProps) {
   ]);
 
   return (
-    <main className="min-h-screen bg-stone-50">
+    <>
+      <Header />
+      <main className="min-h-screen bg-stone-50 dark:bg-stone-950">
       <div className="mx-auto max-w-5xl px-6 py-10">
         {/* Back */}
         <Link
           href="/"
-          className="text-sm font-medium text-stone-500 hover:text-stone-900"
+          className="text-sm font-medium text-stone-500 hover:text-stone-900 dark:text-stone-400 dark:hover:text-white"
         >
           ← Back to rankings
         </Link>
 
         {/* Hero */}
-        <div className="mt-6 overflow-hidden rounded-3xl border bg-white">
+        <div className="mt-6 overflow-hidden rounded-3xl border bg-white dark:bg-stone-900">
           {primaryPhoto ? (
-            <div className="aspect-[16/7] w-full overflow-hidden bg-stone-100">
+            <div className="aspect-[16/7] w-full overflow-hidden bg-stone-100 dark:bg-stone-800">
               <img
                 src={primaryPhoto.image_url}
                 alt={shop.name}
@@ -162,7 +165,7 @@ export default async function ShopPage({ params }: PageProps) {
               />
             </div>
           ) : (
-            <div className="flex aspect-[16/7] w-full items-center justify-center bg-stone-100">
+            <div className="flex aspect-[16/7] w-full items-center justify-center bg-stone-100 dark:bg-stone-800">
               <div className="text-center">
                 <div className="text-7xl">🍗</div>
 
@@ -177,13 +180,15 @@ export default async function ShopPage({ params }: PageProps) {
                 <h1 className="text-4xl font-bold">{shop.name}</h1>
 
                 {(shop.city || shop.state) && (
-                  <p className="mt-2 text-stone-500">
+                  <p className="mt-2 text-stone-500 dark:text-stone-400">
                     {[shop.city, shop.state].filter(Boolean).join(", ")}
                   </p>
                 )}
 
                 {shop.address && (
-                  <p className="mt-2 text-sm text-stone-500">{shop.address}</p>
+                  <p className="mt-2 text-sm text-stone-500 dark:text-stone-400">
+                    {shop.address}
+                  </p>
                 )}
               </div>
 
@@ -196,13 +201,13 @@ export default async function ShopPage({ params }: PageProps) {
 
             {/* Description */}
             {shop.description && (
-              <p className="mt-6 max-w-3xl whitespace-pre-line text-stone-700">
+              <p className="mt-6 max-w-3xl whitespace-pre-line text-stone-700 dark:text-stone-300">
                 {shop.description}
               </p>
             )}
 
             {/* Visit count */}
-            <p className="mt-6 text-sm text-stone-500">
+            <p className="mt-6 text-sm text-stone-500 dark:text-stone-400">
               {visits?.length ?? 0}{" "}
               {(visits?.length ?? 0) === 1 ? "visit" : "visits"}
             </p>
@@ -254,7 +259,7 @@ export default async function ShopPage({ params }: PageProps) {
                 return (
                   <article
                     key={visit.id}
-                    className="rounded-2xl border bg-white p-6"
+                    className="rounded-2xl border bg-white p-6 dark:bg-stone-900"
                   >
                     {/* Review header */}
                     <div className="flex items-start justify-between gap-4">
@@ -307,7 +312,7 @@ export default async function ShopPage({ params }: PageProps) {
                     {/* Vegetables */}
                     {vegetables.length > 0 && (
                       <div className="mt-5">
-                        <p className="text-sm font-medium text-stone-500">
+                        <p className="text-sm font-medium text-stone-500 dark:text-stone-400">
                           Vegetables
                         </p>
 
@@ -315,7 +320,7 @@ export default async function ShopPage({ params }: PageProps) {
                           {vegetables.map((item) => (
                             <span
                               key={item.vegetable}
-                              className="rounded-full bg-green-100 px-3 py-1 text-sm text-green-800"
+                              className="rounded-full bg-green-100 px-3 py-1 text-sm text-green-800 dark:bg-green-950/50 dark:text-green-300"
                             >
                               {item.vegetable}
                             </span>
@@ -327,7 +332,7 @@ export default async function ShopPage({ params }: PageProps) {
                     {/* Sides */}
                     {sides.length > 0 && (
                       <div className="mt-5">
-                        <p className="text-sm font-medium text-stone-500">
+                        <p className="text-sm font-medium text-stone-500 dark:text-stone-400">
                           Sides
                         </p>
 
@@ -335,7 +340,7 @@ export default async function ShopPage({ params }: PageProps) {
                           {sides.map((item) => (
                             <span
                               key={item.side}
-                              className="rounded-full bg-amber-100 px-3 py-1 text-sm text-amber-800"
+                              className="rounded-full bg-amber-100 px-3 py-1 text-sm text-amber-800 dark:bg-amber-950/50 dark:text-amber-300"
                             >
                               {item.side}
                             </span>
@@ -347,11 +352,11 @@ export default async function ShopPage({ params }: PageProps) {
                     {/* Comments */}
                     {visit.comments && (
                       <div className="mt-5 border-t pt-5">
-                        <p className="text-sm font-medium text-stone-500">
+                        <p className="text-sm font-medium text-stone-500 dark:text-stone-400">
                           Comments
                         </p>
 
-                        <p className="mt-2 whitespace-pre-line text-stone-700">
+                        <p className="mt-2 whitespace-pre-line text-stone-700 dark:text-stone-300">
                           {visit.comments}
                         </p>
                       </div>
@@ -360,14 +365,17 @@ export default async function ShopPage({ params }: PageProps) {
                 );
               })
             ) : (
-              <div className="rounded-2xl border bg-white p-8 text-center">
-                <p className="text-stone-500">No reviews yet.</p>
+              <div className="rounded-2xl border bg-white p-8 text-center dark:bg-stone-900">
+                <p className="text-stone-500 dark:text-stone-400">
+                  No reviews yet.
+                </p>
               </div>
             )}
           </div>
         </section>
       </div>
     </main>
+    </>
   );
 }
 
@@ -381,8 +389,8 @@ function RatingCard({
   value: number;
 }) {
   return (
-    <div className="rounded-2xl border bg-white p-5">
-      <p className="text-sm text-stone-500">
+    <div className="rounded-2xl border bg-white p-5 dark:bg-stone-900">
+      <p className="text-sm text-stone-500 dark:text-stone-400">
         {emoji} {label}
       </p>
 
@@ -403,8 +411,8 @@ function MiniRating({
   value: number | string;
 }) {
   return (
-    <div className="rounded-xl bg-stone-50 p-3">
-      <p className="text-xs text-stone-500">
+    <div className="rounded-xl bg-stone-50 p-3 dark:bg-stone-800">
+      <p className="text-xs text-stone-500 dark:text-stone-400">
         {emoji} {label}
       </p>
 

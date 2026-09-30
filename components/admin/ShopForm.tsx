@@ -106,7 +106,7 @@ export default function ShopForm({ shop }: ShopFormProps) {
           value={name}
           onChange={(e) => setName(e.target.value)}
           required
-          className="w-full rounded-lg border p-3"
+          className="w-full rounded-lg border p-3 dark:bg-stone-800"
           placeholder="e.g. Ayam Gepuk Pak Gembus"
         />
       </div>
@@ -118,7 +118,7 @@ export default function ShopForm({ shop }: ShopFormProps) {
           type="text"
           value={address}
           onChange={(e) => setAddress(e.target.value)}
-          className="w-full rounded-lg border p-3"
+          className="w-full rounded-lg border p-3 dark:bg-stone-800"
           placeholder="Street address"
         />
       </div>
@@ -131,7 +131,7 @@ export default function ShopForm({ shop }: ShopFormProps) {
             type="text"
             value={city}
             onChange={(e) => setCity(e.target.value)}
-            className="w-full rounded-lg border p-3"
+            className="w-full rounded-lg border p-3 dark:bg-stone-800"
             placeholder="e.g. Kuala Lumpur"
           />
         </div>
@@ -143,7 +143,7 @@ export default function ShopForm({ shop }: ShopFormProps) {
             type="text"
             value={state}
             onChange={(e) => setState(e.target.value)}
-            className="w-full rounded-lg border p-3"
+            className="w-full rounded-lg border p-3 dark:bg-stone-800"
             placeholder="e.g. Selangor"
           />
         </div>
@@ -156,13 +156,13 @@ export default function ShopForm({ shop }: ShopFormProps) {
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           rows={4}
-          className="w-full rounded-lg border p-3"
+          className="w-full rounded-lg border p-3 dark:bg-stone-800"
           placeholder="Short description of the shop..."
         />
       </div>
 
       {error && (
-        <div className="rounded-lg bg-red-50 p-4 text-sm text-red-600">
+        <div className="rounded-lg bg-red-50 p-4 text-sm text-red-600 dark:bg-red-950/40 dark:text-red-300">
           {error}
         </div>
       )}

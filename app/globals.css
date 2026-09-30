@@ -1,8 +1,15 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --background: #fafaf9;
   --foreground: #1c1917;
+}
+
+.dark {
+  --background: #1c1917;
+  --foreground: #fafaf9;
 }
 
 @theme inline {
@@ -17,6 +24,20 @@
   ::after,
   ::before {
     border-color: var(--color-stone-200);
+  }
+
+  .dark *,
+  .dark ::after,
+  .dark ::before {
+    border-color: var(--color-stone-800);
+  }
+
+  :root {
+    color-scheme: light;
+  }
+
+  .dark {
+    color-scheme: dark;
   }
 }
 

@@ -19,7 +19,7 @@ export default async function ShopsPage() {
       <main className="mx-auto max-w-6xl p-8">
         <h1 className="text-3xl font-bold">Manage Shops</h1>
 
-        <p className="mt-4 text-red-600">Failed to load shops.</p>
+        <p className="mt-4 text-red-600 dark:text-red-400">Failed to load shops.</p>
       </main>
     );
   }
@@ -33,7 +33,7 @@ export default async function ShopsPage() {
         <div>
           <h1 className="text-3xl font-bold">Manage Shops</h1>
 
-          <p className="mt-1 text-stone-500">
+          <p className="mt-1 text-stone-500 dark:text-stone-400">
             Add and manage your ayam gepuk shops.
           </p>
         </div>
@@ -49,7 +49,7 @@ export default async function ShopsPage() {
       {shops && shops.length > 0 ? (
         <div className="overflow-x-auto rounded-xl border">
           <table className="w-full min-w-[720px]">
-            <thead className="bg-stone-100">
+            <thead className="bg-stone-100 dark:bg-stone-800">
               <tr>
                 <th className="px-4 py-3 text-left">Shop</th>
 
@@ -68,7 +68,7 @@ export default async function ShopsPage() {
                     <div className="font-medium">{shop.name}</div>
 
                     {shop.address && (
-                      <div className="text-sm text-stone-500">
+                      <div className="text-sm text-stone-500 dark:text-stone-400">
                         {shop.address}
                       </div>
                     )}
@@ -81,9 +81,11 @@ export default async function ShopsPage() {
 
                   <td className="px-4 py-4">
                     {shop.is_active ? (
-                      <span className="font-medium text-green-600">Active</span>
+                      <span className="font-medium text-green-600 dark:text-green-400">
+                        Active
+                      </span>
                     ) : (
-                      <span className="font-medium text-stone-500">
+                      <span className="font-medium text-stone-500 dark:text-stone-400">
                         Inactive
                       </span>
                     )}
@@ -107,7 +109,7 @@ export default async function ShopsPage() {
 
                       <Link
                         href={`/admin/shops/${shop.id}/photos`}
-                        className="rounded-lg border px-4 py-2 text-sm font-medium hover:bg-stone-100"
+                        className="rounded-lg border px-4 py-2 text-sm font-medium hover:bg-stone-100 dark:hover:bg-stone-800"
                       >
                         Photos
                       </Link>
@@ -126,7 +128,9 @@ export default async function ShopsPage() {
         </div>
       ) : (
         <div className="rounded-xl border p-8 text-center">
-          <p className="text-stone-500">No shops have been added yet.</p>
+          <p className="text-stone-500 dark:text-stone-400">
+            No shops have been added yet.
+          </p>
 
           <Link
             href="/admin/shops/new"

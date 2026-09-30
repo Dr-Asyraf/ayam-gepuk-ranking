@@ -35,11 +35,11 @@ export default function LoginPage() {
   };
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-stone-50 p-8">
-      <div className="w-full max-w-md rounded-2xl border bg-white p-8 shadow-sm">
+    <main className="flex min-h-screen items-center justify-center bg-stone-50 p-8 dark:bg-stone-950">
+      <div className="w-full max-w-md rounded-2xl border bg-white p-8 shadow-sm dark:bg-stone-900">
         <h1 className="mb-2 text-3xl font-bold">Admin Login</h1>
 
-        <p className="mb-8 text-stone-500">
+        <p className="mb-8 text-stone-500 dark:text-stone-400">
           Sign in to manage your ayam gepuk rankings.
         </p>
 
@@ -52,7 +52,7 @@ export default function LoginPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full rounded-lg border p-3"
+              className="w-full rounded-lg border p-3 dark:bg-stone-800"
               placeholder="admin@example.com"
             />
           </div>
@@ -65,13 +65,13 @@ export default function LoginPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="w-full rounded-lg border p-3"
+              className="w-full rounded-lg border p-3 dark:bg-stone-800"
               placeholder="••••••••"
             />
           </div>
 
           {error && (
-            <p className="rounded-lg bg-red-50 p-3 text-sm text-red-600">
+            <p className="rounded-lg bg-red-50 p-3 text-sm text-red-600 dark:bg-red-950/40 dark:text-red-300">
               {error}
             </p>
           )}

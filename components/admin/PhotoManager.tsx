@@ -262,10 +262,10 @@ export default function PhotoManager({
   return (
     <div className="space-y-8">
       {/* Upload */}
-      <div className="rounded-2xl border bg-white p-6">
+      <div className="rounded-2xl border bg-white p-6 dark:bg-stone-900">
         <h2 className="text-lg font-bold">Upload photo</h2>
 
-        <p className="mt-1 text-sm text-stone-500">
+        <p className="mt-1 text-sm text-stone-500 dark:text-stone-400">
           JPG, PNG or other image formats. Maximum 5MB.
         </p>
 
@@ -284,7 +284,9 @@ export default function PhotoManager({
 
       {/* Message */}
       {message && (
-        <div className="rounded-xl border bg-white p-4 text-sm">{message}</div>
+        <div className="rounded-xl border bg-white p-4 text-sm dark:bg-stone-900">
+          {message}
+        </div>
       )}
 
       {/* Photos */}
@@ -292,17 +294,17 @@ export default function PhotoManager({
         <h2 className="text-lg font-bold">Photos</h2>
 
         {photos.length === 0 ? (
-          <div className="mt-4 rounded-2xl border bg-white p-8 text-center">
-            <p className="text-stone-500">No photos yet.</p>
+          <div className="mt-4 rounded-2xl border bg-white p-8 text-center dark:bg-stone-900">
+            <p className="text-stone-500 dark:text-stone-400">No photos yet.</p>
           </div>
         ) : (
           <div className="mt-4 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {photos.map((photo) => (
               <div
                 key={photo.id}
-                className="overflow-hidden rounded-2xl border bg-white"
+                className="overflow-hidden rounded-2xl border bg-white dark:bg-stone-900"
               >
-                <div className="aspect-[4/3] overflow-hidden bg-stone-100">
+                <div className="aspect-[4/3] overflow-hidden bg-stone-100 dark:bg-stone-800">
                   <img
                     src={photo.image_url}
                     alt={photo.caption ?? "Shop photo"}
@@ -312,7 +314,7 @@ export default function PhotoManager({
 
                 <div className="p-4">
                   {photo.is_primary && (
-                    <span className="inline-block rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-800">
+                    <span className="inline-block rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-800 dark:bg-green-950/50 dark:text-green-300">
                       Primary photo
                     </span>
                   )}
@@ -322,7 +324,7 @@ export default function PhotoManager({
                       <button
                         type="button"
                         onClick={() => handleSetPrimary(photo.id)}
-                        className="rounded-lg border px-3 py-2 text-sm font-medium hover:bg-stone-100"
+                        className="rounded-lg border px-3 py-2 text-sm font-medium hover:bg-stone-100 dark:hover:bg-stone-800"
                       >
                         Set primary
                       </button>
@@ -331,7 +333,7 @@ export default function PhotoManager({
                     <button
                       type="button"
                       onClick={() => handleDelete(photo)}
-                      className="rounded-lg border border-red-200 px-3 py-2 text-sm font-medium text-red-600 hover:bg-red-50"
+                      className="rounded-lg border border-red-200 px-3 py-2 text-sm font-medium text-red-600 hover:bg-red-50 dark:border-red-900 dark:text-red-400 dark:hover:bg-red-950/40"
                     >
                       Delete
                     </button>

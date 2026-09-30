@@ -43,7 +43,7 @@ export default function ActivateShopButton({
       type="button"
       onClick={handleActivate}
       disabled={loading}
-      className="font-medium text-green-600 hover:underline disabled:opacity-50"
+      className="font-medium text-green-600 hover:underline disabled:opacity-50 dark:text-green-400"
     >
       {loading ? "Activating..." : "Activate"}
     </button>

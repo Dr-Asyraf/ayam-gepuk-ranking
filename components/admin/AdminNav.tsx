@@ -1,4 +1,5 @@
 import Link from "next/link";
+import ThemeToggle from "@/components/layout/ThemeToggle";
 
 const links = [
   { href: "/admin", label: "Dashboard" },
@@ -9,9 +10,9 @@ const links = [
 
 export default function AdminNav() {
   return (
-    <header className="border-b bg-white">
+    <header className="border-b bg-white dark:bg-stone-900">
       <div className="mx-auto flex max-w-6xl items-center gap-1 overflow-x-auto px-6 py-3">
-        <Link href="/admin" className="mr-4 text-sm font-bold">
+        <Link href="/admin" className="mr-4 shrink-0 text-sm font-bold">
           Ayam Gepuk Admin
         </Link>
 
@@ -19,11 +20,15 @@ export default function AdminNav() {
           <Link
             key={href}
             href={href}
-            className="whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium text-stone-600 hover:bg-stone-100 hover:text-stone-900"
+            className="whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium text-stone-600 hover:bg-stone-100 hover:text-stone-900 dark:text-stone-300 dark:hover:bg-stone-800 dark:hover:text-white"
           >
             {label}
           </Link>
         ))}
+
+        <div className="ml-auto shrink-0">
+          <ThemeToggle />
+        </div>
       </div>
     </header>
   );

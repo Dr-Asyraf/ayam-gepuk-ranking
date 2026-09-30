@@ -121,7 +121,7 @@ export default function ReviewForm({ shops }: ReviewFormProps) {
         <select
           value={shopId}
           onChange={(e) => setShopId(e.target.value)}
-          className="w-full rounded-lg border p-3"
+          className="w-full rounded-lg border p-3 dark:bg-stone-800"
           required
         >
           <option value="">Select a shop</option>
@@ -144,7 +144,7 @@ export default function ReviewForm({ shops }: ReviewFormProps) {
           type="date"
           value={visitedAt}
           onChange={(e) => setVisitedAt(e.target.value)}
-          className="w-full rounded-lg border p-3"
+          className="w-full rounded-lg border p-3 dark:bg-stone-800"
           required
         />
       </div>
@@ -226,15 +226,15 @@ export default function ReviewForm({ shops }: ReviewFormProps) {
           value={comments}
           onChange={(e) => setComments(e.target.value)}
           rows={5}
-          className="w-full rounded-lg border p-3"
+          className="w-full rounded-lg border p-3 dark:bg-stone-800"
           placeholder="What did you think?"
         />
       </div>
 
       {/* OVERALL */}
 
-      <div className="rounded-xl bg-stone-100 p-6">
-        <p className="text-sm text-stone-500">Overall rating</p>
+      <div className="rounded-xl bg-stone-100 p-6 dark:bg-stone-800">
+        <p className="text-sm text-stone-500 dark:text-stone-400">Overall rating</p>
 
         <p className="text-4xl font-bold">
           {overall !== null ? `${overall.toFixed(2)} / 10` : "—"}
@@ -244,7 +244,9 @@ export default function ReviewForm({ shops }: ReviewFormProps) {
       {/* SUBMIT */}
 
       {error && (
-        <p className="rounded-lg bg-red-100 p-4 text-red-700">{error}</p>
+        <p className="rounded-lg bg-red-100 p-4 text-red-700 dark:bg-red-950/50 dark:text-red-300">
+          {error}
+        </p>
       )}
 
       <button
@@ -279,7 +281,7 @@ function RatingInput({
           step="0.1"
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className="w-full rounded-lg border p-3"
+          className="w-full rounded-lg border p-3 dark:bg-stone-800"
           placeholder="0–10"
           required
         />

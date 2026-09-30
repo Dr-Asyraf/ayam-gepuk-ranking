@@ -1,4 +1,5 @@
 import RankingCard from "@/components/rankings/RankingCard";
+import Header from "@/components/layout/Header";
 import { createClient } from "@/lib/supabase/server";
 
 export default async function Home() {
@@ -15,28 +16,35 @@ export default async function Home() {
     console.error(error);
 
     return (
-      <main className="min-h-screen bg-stone-50 px-6 py-10">
-        <div className="mx-auto max-w-5xl">
-          <h1 className="text-4xl font-bold">Ayam Gepuk Rankings</h1>
+      <>
+        <Header />
+        <main className="min-h-screen bg-stone-50 px-6 py-10 dark:bg-stone-950">
+          <div className="mx-auto max-w-5xl">
+            <h1 className="text-4xl font-bold">Ayam Gepuk Rankings</h1>
 
-          <p className="mt-4 text-red-500">Failed to load rankings.</p>
-        </div>
-      </main>
+            <p className="mt-4 text-red-500 dark:text-red-400">
+              Failed to load rankings.
+            </p>
+          </div>
+        </main>
+      </>
     );
   }
 
   return (
-    <main className="min-h-screen bg-stone-50">
+    <>
+      <Header />
+      <main className="min-h-screen bg-stone-50 dark:bg-stone-950">
       <div className="mx-auto max-w-5xl px-6 py-10">
         {/* Header */}
         <div>
-          <p className="text-sm font-medium uppercase tracking-wide text-stone-500">
+          <p className="text-sm font-medium uppercase tracking-wide text-stone-500 dark:text-stone-400">
             One Man&apos;s Search For The Best Gepuk
           </p>
 
           <h1 className="mt-2 text-4xl font-bold">Asyraf&apos;s Ayam Gepuk Rankings 🍗</h1>
 
-          <p className="mt-3 text-stone-500">
+          <p className="mt-3 text-stone-500 dark:text-stone-400">
             Ranking my favourite ayam gepuk shops based on my visits and
             ratings.
           </p>
@@ -63,12 +71,15 @@ export default async function Home() {
               />
             ))
           ) : (
-            <div className="rounded-2xl border bg-white p-10 text-center">
-              <p className="text-stone-500">No ranked shops yet.</p>
+            <div className="rounded-2xl border bg-white p-10 text-center dark:bg-stone-900">
+              <p className="text-stone-500 dark:text-stone-400">
+                No ranked shops yet.
+              </p>
             </div>
           )}
         </div>
       </div>
-    </main>
+      </main>
+    </>
   );
 }

@@ -39,18 +39,20 @@ export default async function AdminReviewsPage() {
     console.error("FAILED TO LOAD REVIEWS:", error);
 
     return (
-      <main className="min-h-screen bg-stone-50">
+      <main className="min-h-screen bg-stone-50 dark:bg-stone-950">
         <div className="mx-auto max-w-5xl px-6 py-10">
           <h1 className="text-3xl font-bold">Reviews</h1>
 
-          <p className="mt-4 text-red-600">Failed to load reviews.</p>
+          <p className="mt-4 text-red-600 dark:text-red-400">
+            Failed to load reviews.
+          </p>
         </div>
       </main>
     );
   }
 
   return (
-    <main className="min-h-screen bg-stone-50">
+    <main className="min-h-screen bg-stone-50 dark:bg-stone-950">
       <AdminNav />
 
       <div className="mx-auto max-w-5xl px-6 py-10">
@@ -59,14 +61,14 @@ export default async function AdminReviewsPage() {
           <div>
             <Link
               href="/admin"
-              className="text-sm font-medium text-stone-500 hover:text-stone-900"
+              className="text-sm font-medium text-stone-500 hover:text-stone-900 dark:text-stone-400 dark:hover:text-white"
             >
               ← Admin Dashboard
             </Link>
 
             <h1 className="mt-4 text-3xl font-bold">Reviews</h1>
 
-            <p className="mt-1 text-stone-500">
+            <p className="mt-1 text-stone-500 dark:text-stone-400">
               View your Ayam Gepuk review history.
             </p>
           </div>
@@ -102,7 +104,7 @@ export default async function AdminReviewsPage() {
                 : null;
 
               return (
-                <div key={visit.id} className="rounded-2xl border bg-white p-6">
+                <div key={visit.id} className="rounded-2xl border bg-white p-6 dark:bg-stone-900">
                   {/* Shop + date + overall */}
 <div className="flex flex-wrap items-start justify-between gap-4">
                     <div>
@@ -110,7 +112,7 @@ export default async function AdminReviewsPage() {
                         {shop?.name ?? "Unknown shop"}
                       </h2>
 
-                      <p className="mt-1 text-sm text-stone-500">
+                      <p className="mt-1 text-sm text-stone-500 dark:text-stone-400">
                         Visited on {formatDate(visit.visited_at)}
                       </p>
                     </div>
@@ -149,7 +151,7 @@ export default async function AdminReviewsPage() {
                   {visit.visit_vegetables &&
                     visit.visit_vegetables.length > 0 && (
                       <div className="mt-5">
-                        <p className="text-sm font-medium text-stone-500">
+                        <p className="text-sm font-medium text-stone-500 dark:text-stone-400">
                           Vegetables
                         </p>
 
@@ -157,7 +159,7 @@ export default async function AdminReviewsPage() {
                           {visit.visit_vegetables.map((item) => (
                             <span
                               key={item.vegetable}
-                              className="rounded-full bg-green-100 px-3 py-1 text-sm text-green-800"
+                              className="rounded-full bg-green-100 px-3 py-1 text-sm text-green-800 dark:bg-green-950/50 dark:text-green-300"
                             >
                               {item.vegetable}
                             </span>
@@ -169,13 +171,13 @@ export default async function AdminReviewsPage() {
                   {/* Sides */}
                   {visit.visit_sides && visit.visit_sides.length > 0 && (
                     <div className="mt-5">
-                      <p className="text-sm font-medium text-stone-500">Sides</p>
+                      <p className="text-sm font-medium text-stone-500 dark:text-stone-400">Sides</p>
 
                       <div className="mt-2 flex flex-wrap gap-2">
                         {visit.visit_sides.map((item) => (
                           <span
                             key={item.side}
-                            className="rounded-full bg-amber-100 px-3 py-1 text-sm text-amber-800"
+                            className="rounded-full bg-amber-100 px-3 py-1 text-sm text-amber-800 dark:bg-amber-950/50 dark:text-amber-300"
                           >
                             {item.side}
                           </span>
@@ -187,11 +189,11 @@ export default async function AdminReviewsPage() {
                   {/* Comments */}
                   {visit.comments && (
                     <div className="mt-5 border-t pt-5">
-                      <p className="text-sm font-medium text-stone-500">
+                      <p className="text-sm font-medium text-stone-500 dark:text-stone-400">
                         Comments
                       </p>
 
-                      <p className="mt-2 whitespace-pre-line text-stone-700">
+                      <p className="mt-2 whitespace-pre-line text-stone-700 dark:text-stone-300">
                         {visit.comments}
                       </p>
                     </div>
@@ -201,7 +203,7 @@ export default async function AdminReviewsPage() {
                   <div className="mt-6 flex gap-3 border-t pt-5">
                     <Link
                       href={`/admin/reviews/${visit.id}/edit`}
-                      className="rounded-lg border px-4 py-2 text-sm font-medium hover:bg-stone-50"
+                      className="rounded-lg border px-4 py-2 text-sm font-medium hover:bg-stone-50 dark:hover:bg-stone-800"
                     >
                       Edit
                     </Link>
@@ -212,8 +214,8 @@ export default async function AdminReviewsPage() {
               );
             })
           ) : (
-            <div className="rounded-2xl border bg-white p-10 text-center">
-              <p className="text-stone-500">No reviews yet.</p>
+            <div className="rounded-2xl border bg-white p-10 text-center dark:bg-stone-900">
+              <p className="text-stone-500 dark:text-stone-400">No reviews yet.</p>
 
               <Link
                 href="/admin/visits/new"
@@ -249,8 +251,8 @@ function Rating({
   value: number | string;
 }) {
   return (
-    <div className="rounded-xl bg-stone-50 p-3">
-      <p className="text-sm text-stone-500">
+    <div className="rounded-xl bg-stone-50 p-3 dark:bg-stone-800">
+      <p className="text-sm text-stone-500 dark:text-stone-400">
         {emoji} {label}
       </p>
 

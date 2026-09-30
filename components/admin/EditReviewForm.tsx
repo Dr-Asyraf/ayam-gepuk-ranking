@@ -191,7 +191,7 @@ export default function EditReviewForm({ visit }: EditReviewFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="rounded-2xl border bg-white p-6">
+    <form onSubmit={handleSubmit} className="rounded-2xl border bg-white p-6 dark:bg-stone-900">
       {/* Visit date */}
       <div>
         <label htmlFor="visitedAt" className="block text-sm font-medium">
@@ -203,7 +203,7 @@ export default function EditReviewForm({ visit }: EditReviewFormProps) {
           type="date"
           value={visitedAt}
           onChange={(event) => setVisitedAt(event.target.value)}
-          className="mt-2 w-full rounded-xl border px-4 py-3"
+          className="mt-2 w-full rounded-xl border px-4 py-3 dark:bg-stone-800"
           required
         />
       </div>
@@ -222,7 +222,7 @@ export default function EditReviewForm({ visit }: EditReviewFormProps) {
           step="0.1"
           value={chicken}
           onChange={(event) => setChicken(event.target.value)}
-          className="mt-2 w-full rounded-xl border px-4 py-3"
+          className="mt-2 w-full rounded-xl border px-4 py-3 dark:bg-stone-800"
           required
         />
       </div>
@@ -241,7 +241,7 @@ export default function EditReviewForm({ visit }: EditReviewFormProps) {
           step="0.1"
           value={sambalKacang}
           onChange={(event) => setSambalKacang(event.target.value)}
-          className="mt-2 w-full rounded-xl border px-4 py-3"
+          className="mt-2 w-full rounded-xl border px-4 py-3 dark:bg-stone-800"
           required
         />
       </div>
@@ -260,7 +260,7 @@ export default function EditReviewForm({ visit }: EditReviewFormProps) {
           step="0.1"
           value={sayur}
           onChange={(event) => setSayur(event.target.value)}
-          className="mt-2 w-full rounded-xl border px-4 py-3"
+          className="mt-2 w-full rounded-xl border px-4 py-3 dark:bg-stone-800"
           required
         />
       </div>
@@ -269,13 +269,13 @@ export default function EditReviewForm({ visit }: EditReviewFormProps) {
       <div className="mt-6">
         <p className="text-sm font-medium">🥬 Vegetables</p>
 
-        <p className="mt-1 text-sm text-stone-500">Select one or more.</p>
+        <p className="mt-1 text-sm text-stone-500 dark:text-stone-400">Select one or more.</p>
 
         <div className="mt-3 space-y-2">
           {vegetablesOptions.map((vegetable) => (
             <label
               key={vegetable}
-              className="flex cursor-pointer items-center gap-3 rounded-xl border p-3 hover:bg-stone-100"
+              className="flex cursor-pointer items-center gap-3 rounded-xl border p-3 hover:bg-stone-100 dark:hover:bg-stone-800"
             >
               <input
                 type="checkbox"
@@ -303,7 +303,7 @@ export default function EditReviewForm({ visit }: EditReviewFormProps) {
           step="0.1"
           value={sides}
           onChange={(event) => setSides(event.target.value)}
-          className="mt-2 w-full rounded-xl border px-4 py-3"
+          className="mt-2 w-full rounded-xl border px-4 py-3 dark:bg-stone-800"
           required
         />
       </div>
@@ -312,7 +312,7 @@ export default function EditReviewForm({ visit }: EditReviewFormProps) {
       <div className="mt-6">
         <p className="text-sm font-medium">🍳 Sides</p>
 
-        <p className="mt-1 text-sm text-stone-500">
+        <p className="mt-1 text-sm text-stone-500 dark:text-stone-400">
           Select the sides you ordered.
         </p>
 
@@ -320,7 +320,7 @@ export default function EditReviewForm({ visit }: EditReviewFormProps) {
           {sidesOptions.map((side) => (
             <label
               key={side}
-              className="flex cursor-pointer items-center gap-3 rounded-xl border p-3 hover:bg-stone-100"
+              className="flex cursor-pointer items-center gap-3 rounded-xl border p-3 hover:bg-stone-100 dark:hover:bg-stone-800"
             >
               <input
                 type="checkbox"
@@ -345,7 +345,7 @@ export default function EditReviewForm({ visit }: EditReviewFormProps) {
           value={comments}
           onChange={(event) => setComments(event.target.value)}
           rows={5}
-          className="mt-2 w-full rounded-xl border px-4 py-3"
+          className="mt-2 w-full rounded-xl border px-4 py-3 dark:bg-stone-800"
           placeholder="What did you think?"
         />
       </div>
@@ -360,7 +360,9 @@ export default function EditReviewForm({ visit }: EditReviewFormProps) {
       </button>
 
       {message && (
-        <p className="mt-4 text-center text-sm text-stone-600">{message}</p>
+        <p className="mt-4 text-center text-sm text-stone-600 dark:text-stone-300">
+          {message}
+        </p>
       )}
     </form>
   );

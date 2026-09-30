@@ -31,12 +31,12 @@ export default function RankingCard({
 }: RankingCardProps) {
   const rankStyle =
     rank === 1
-      ? "border-amber-300 bg-amber-50"
+      ? "border-amber-300 bg-amber-50 dark:border-amber-500/50 dark:bg-amber-950/40"
       : rank === 2
-        ? "border-stone-300 bg-stone-50"
+        ? "border-stone-300 bg-stone-50 dark:border-stone-700 dark:bg-stone-800"
         : rank === 3
-          ? "border-orange-300 bg-orange-50"
-          : "border-stone-200 bg-white";
+          ? "border-orange-300 bg-orange-50 dark:border-orange-500/50 dark:bg-orange-950/40"
+          : "border-stone-200 bg-white dark:border-stone-800 dark:bg-stone-900";
 
   const rankEmoji =
     rank === 1 ? "🥇" : rank === 2 ? "🥈" : rank === 3 ? "🥉" : `#${rank}`;
@@ -44,11 +44,11 @@ export default function RankingCard({
   return (
     <Link
       href={`/shops/${id}`}
-      className="block overflow-hidden rounded-2xl border bg-white transition hover:-translate-y-0.5 hover:shadow-md"
+      className="block overflow-hidden rounded-2xl border bg-white transition hover:-translate-y-0.5 hover:shadow-md dark:bg-stone-900"
     >
       {/* Image */}
       {imageUrl ? (
-        <div className="aspect-[16/7] w-full overflow-hidden bg-stone-100">
+        <div className="aspect-[16/7] w-full overflow-hidden bg-stone-100 dark:bg-stone-800">
           <img
             src={imageUrl}
             alt={name}
@@ -56,11 +56,13 @@ export default function RankingCard({
           />
         </div>
       ) : (
-        <div className="flex aspect-[16/7] w-full items-center justify-center bg-stone-100">
+        <div className="flex aspect-[16/7] w-full items-center justify-center bg-stone-100 dark:bg-stone-800">
           <div className="text-center">
             <div className="text-5xl">🍗</div>
 
-            <p className="mt-2 text-sm text-stone-500">No photo available</p>
+            <p className="mt-2 text-sm text-stone-500 dark:text-stone-400">
+              No photo available
+            </p>
           </div>
         </div>
       )}
@@ -73,7 +75,7 @@ export default function RankingCard({
         <div className="flex items-start justify-between gap-4">
           <div className="flex items-start gap-4">
             {/* Rank */}
-            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white text-lg font-bold shadow-sm">
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white text-lg font-bold shadow-sm dark:bg-stone-800">
               {rankEmoji}
             </div>
 
@@ -82,12 +84,12 @@ export default function RankingCard({
               <h2 className="text-xl font-bold">{name}</h2>
 
               {(city || state) && (
-                <p className="mt-1 text-sm text-stone-500">
+                <p className="mt-1 text-sm text-stone-500 dark:text-stone-400">
                   {[city, state].filter(Boolean).join(", ")}
                 </p>
               )}
 
-              <p className="mt-1 text-sm text-stone-500">
+              <p className="mt-1 text-sm text-stone-500 dark:text-stone-400">
                 {visitCount} {visitCount === 1 ? "visit" : "visits"}
               </p>
             </div>
@@ -97,7 +99,9 @@ export default function RankingCard({
           <div className="text-right">
             <p className="text-4xl font-bold">{overallRating.toFixed(2)}</p>
 
-            <p className="text-sm text-stone-500">/ 10</p>
+            <p className="text-sm text-stone-500 dark:text-stone-400">
+              / 10
+            </p>
           </div>
         </div>
 
@@ -118,7 +122,7 @@ export default function RankingCard({
 
         {/* Details link */}
         <div className="mt-5 border-t pt-4">
-          <p className="text-sm font-medium text-stone-500">
+          <p className="text-sm font-medium text-stone-500 dark:text-stone-400">
             View shop details →
           </p>
         </div>
@@ -137,14 +141,17 @@ function Rating({
   value: number;
 }) {
   return (
-    <div className="rounded-xl bg-white/80 p-3">
-      <p className="text-stone-500">
+    <div className="rounded-xl bg-white/80 p-3 dark:bg-stone-800/80">
+      <p className="text-stone-500 dark:text-stone-400">
         {emoji} {label}
       </p>
 
       <p className="mt-1 font-bold">
         {value.toFixed(2)}
-        <span className="font-normal text-stone-500"> / 10</span>
+        <span className="font-normal text-stone-500 dark:text-stone-400">
+          {" "}
+          / 10
+        </span>
       </p>
     </div>
   );

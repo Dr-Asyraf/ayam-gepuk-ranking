@@ -28,21 +28,21 @@ export default async function AdminShopPage({ params }: PageProps) {
   }
 
   return (
-    <main className="min-h-screen bg-stone-50">
+    <main className="min-h-screen bg-stone-50 dark:bg-stone-950">
       <AdminNav />
 
       <div className="mx-auto max-w-3xl px-6 py-10">
         {/* Back */}
         <Link
           href="/admin/shops"
-          className="text-sm font-medium text-stone-500 hover:text-stone-900"
+          className="text-sm font-medium text-stone-500 hover:text-stone-900 dark:text-stone-400 dark:hover:text-white"
         >
           ← Back to shops
         </Link>
 
         {/* Header */}
         <div className="mt-8">
-          <p className="text-sm font-medium uppercase tracking-wide text-stone-500">
+          <p className="text-sm font-medium uppercase tracking-wide text-stone-500 dark:text-stone-400">
             Manage Shop
           </p>
 
@@ -64,10 +64,10 @@ export default async function AdminShopPage({ params }: PageProps) {
         </div>
 
         {/* Photos */}
-        <div className="mt-6 rounded-2xl border bg-white p-6">
+        <div className="mt-6 rounded-2xl border bg-white p-6 dark:bg-stone-900">
           <h2 className="text-lg font-bold">Photos</h2>
 
-          <p className="mt-1 text-sm text-stone-500">
+          <p className="mt-1 text-sm text-stone-500 dark:text-stone-400">
             Upload, set a primary photo and delete photos.
           </p>
 

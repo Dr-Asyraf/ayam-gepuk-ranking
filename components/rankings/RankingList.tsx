@@ -72,7 +72,7 @@ export default function RankingList({ shops }: RankingListProps) {
   return (
     <div>
       {/* Filters */}
-      <div className="mb-8 rounded-2xl border bg-white p-5">
+      <div className="mb-8 rounded-2xl border bg-white p-5 dark:bg-stone-900">
         <div className="grid gap-4 md:grid-cols-3">
           {/* Search */}
           <div>
@@ -86,7 +86,7 @@ export default function RankingList({ shops }: RankingListProps) {
               placeholder="e.g. Ayam Gepuk Pak Gembus"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full rounded-xl border px-4 py-3 outline-none transition focus:border-orange-500"
+              className="w-full rounded-xl border px-4 py-3 outline-none transition focus:border-orange-500 dark:bg-stone-800"
             />
           </div>
 
@@ -100,7 +100,7 @@ export default function RankingList({ shops }: RankingListProps) {
               id="state"
               value={stateFilter}
               onChange={(e) => handleStateChange(e.target.value)}
-              className="w-full rounded-xl border bg-white px-4 py-3 outline-none transition focus:border-orange-500"
+              className="w-full rounded-xl border bg-white px-4 py-3 outline-none transition focus:border-orange-500 dark:bg-stone-800"
             >
               <option value="">All states</option>
 
@@ -123,7 +123,7 @@ export default function RankingList({ shops }: RankingListProps) {
               value={cityFilter}
               onChange={(e) => setCityFilter(e.target.value)}
               disabled={cities.length === 0}
-              className="w-full rounded-xl border bg-white px-4 py-3 outline-none transition focus:border-orange-500 disabled:bg-stone-100 disabled:text-stone-400"
+              className="w-full rounded-xl border bg-white px-4 py-3 outline-none transition focus:border-orange-500 disabled:bg-stone-100 disabled:text-stone-400 dark:bg-stone-800 dark:disabled:bg-stone-700 dark:disabled:text-stone-500"
             >
               <option value="">All cities</option>
 
@@ -138,12 +138,15 @@ export default function RankingList({ shops }: RankingListProps) {
 
         {/* Filter summary */}
         <div className="mt-4 flex items-center justify-between">
-          <p className="text-sm text-stone-500">
+          <p className="text-sm text-stone-500 dark:text-stone-400">
             Showing{" "}
-            <span className="font-medium text-stone-700">
+            <span className="font-medium text-stone-700 dark:text-stone-200">
               {filteredShops.length}
             </span>{" "}
-            of <span className="font-medium text-stone-700">{shops.length}</span>{" "}
+            of{" "}
+            <span className="font-medium text-stone-700 dark:text-stone-200">
+              {shops.length}
+            </span>{" "}
             shops
           </p>
 
@@ -155,7 +158,7 @@ export default function RankingList({ shops }: RankingListProps) {
                 setStateFilter("");
                 setCityFilter("");
               }}
-              className="text-sm font-medium text-stone-500 hover:text-stone-900"
+              className="text-sm font-medium text-stone-500 hover:text-stone-900 dark:text-stone-400 dark:hover:text-white"
             >
               Clear filters
             </button>
@@ -165,12 +168,12 @@ export default function RankingList({ shops }: RankingListProps) {
 
       {/* Results */}
       {filteredShops.length === 0 ? (
-        <div className="rounded-2xl border border-dashed bg-white p-12 text-center">
+        <div className="rounded-2xl border border-dashed bg-white p-12 text-center dark:bg-stone-900">
           <div className="text-4xl">🔎</div>
 
           <h3 className="mt-4 text-lg font-bold">No shops found</h3>
 
-          <p className="mt-2 text-sm text-stone-500">
+          <p className="mt-2 text-sm text-stone-500 dark:text-stone-400">
             Try changing your search or filters.
           </p>
         </div>
