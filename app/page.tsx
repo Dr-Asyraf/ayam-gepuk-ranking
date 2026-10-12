@@ -45,8 +45,7 @@ export default async function Home() {
           <h1 className="mt-2 text-4xl font-bold">Asyraf&apos;s Ayam Gepuk Rankings 🍗</h1>
 
           <p className="mt-3 text-stone-500 dark:text-stone-400">
-            Ranking my favourite ayam gepuk shops based on my visits and
-            ratings.
+            Ranking my favourite ayam gepuk shops
           </p>
         </div>
 

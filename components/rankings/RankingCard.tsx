@@ -41,14 +41,31 @@ export default function RankingCard({
           ? "border-orange-300 bg-orange-50 dark:border-orange-500/50 dark:bg-orange-950/40"
           : "border-stone-200 bg-white dark:border-stone-800 dark:bg-stone-900";
 
-  const rankEmoji =
-    rank === 1 ? "🥇" : rank === 2 ? "🥈" : rank === 3 ? "🥉" : `#${rank}`;
+  const rankBadgeStyle =
+    rank === 1
+      ? "bg-gradient-to-br from-amber-300 to-amber-500 text-amber-950 ring-white/50"
+      : rank === 2
+        ? "bg-gradient-to-br from-slate-100 to-slate-400 text-slate-800 ring-white/50"
+        : rank === 3
+          ? "bg-gradient-to-br from-orange-300 to-orange-500 text-orange-950 ring-white/50"
+          : "bg-stone-900/85 text-white ring-white/20 backdrop-blur";
 
   return (
     <Link
       href={`/shops/${id}`}
-      className="block overflow-hidden rounded-2xl border bg-white transition hover:-translate-y-0.5 hover:shadow-md dark:bg-stone-900"
+      className="relative block overflow-hidden rounded-2xl border bg-white transition hover:-translate-y-0.5 hover:shadow-md dark:bg-stone-900"
     >
+      {/* Rank badge */}
+      <div
+        className={`absolute left-4 top-4 z-10 flex h-14 w-14 flex-col items-center justify-center rounded-2xl shadow-lg ring-1 ${rankBadgeStyle}`}
+      >
+        <span className="text-[9px] font-semibold uppercase tracking-widest opacity-70">
+          Rank
+        </span>
+
+        <span className="text-xl font-bold leading-none">{rank}</span>
+      </div>
+
       {/* Image */}
       {imageUrl ? (
         <div className="aspect-[16/7] w-full overflow-hidden bg-stone-100 dark:bg-stone-800">
@@ -77,11 +94,6 @@ export default function RankingCard({
         {/* Top section */}
         <div className="flex items-start justify-between gap-4">
           <div className="flex items-start gap-4">
-            {/* Rank */}
-            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white text-lg font-bold shadow-sm dark:bg-stone-800">
-              {rankEmoji}
-            </div>
-
             {/* Shop information */}
             <div>
               <h2 className="text-xl font-bold">{name}</h2>
