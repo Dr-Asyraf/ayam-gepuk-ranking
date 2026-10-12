@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { formatVisitDate } from "@/lib/dates";
 
 type RankingCardProps = {
   rank: number;
@@ -13,6 +14,7 @@ type RankingCardProps = {
   sayurRating: number;
   sidesRating: number;
   visitCount: number;
+  lastVisitedAt: string | null;
 };
 
 export default function RankingCard({
@@ -28,6 +30,7 @@ export default function RankingCard({
   sayurRating,
   sidesRating,
   visitCount,
+  lastVisitedAt,
 }: RankingCardProps) {
   const rankStyle =
     rank === 1
@@ -91,6 +94,9 @@ export default function RankingCard({
 
               <p className="mt-1 text-sm text-stone-500 dark:text-stone-400">
                 {visitCount} {visitCount === 1 ? "visit" : "visits"}
+
+                {lastVisitedAt &&
+                  ` · Last visited ${formatVisitDate(lastVisitedAt)}`}
               </p>
             </div>
           </div>

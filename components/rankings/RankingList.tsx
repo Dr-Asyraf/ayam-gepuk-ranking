@@ -15,6 +15,7 @@ type Shop = {
   sayur_rating: number | string;
   sides_rating: number | string;
   visit_count: number | string;
+  last_visited_at: string | null;
 };
 
 type RankingListProps = {
@@ -194,6 +195,7 @@ export default function RankingList({ shops }: RankingListProps) {
               sayurRating={Number(shop.sayur_rating)}
               sidesRating={Number(shop.sides_rating)}
               visitCount={Number(shop.visit_count)}
+              lastVisitedAt={shop.last_visited_at}
             />
           ))}
         </div>

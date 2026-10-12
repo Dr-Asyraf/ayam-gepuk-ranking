@@ -68,6 +68,7 @@ export default async function Home() {
                 sayurRating={Number(shop.sayur_rating)}
                 sidesRating={Number(shop.sides_rating)}
                 visitCount={Number(shop.visit_count)}
+                lastVisitedAt={shop.last_visited_at}
               />
             ))
           ) : (

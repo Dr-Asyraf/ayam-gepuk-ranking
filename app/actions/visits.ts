@@ -1,6 +1,7 @@
 'use server'
 
 import { createClient } from '@/lib/supabase/server'
+import { getTodayInMalaysia } from '@/lib/dates'
 import { z } from 'zod'
 
 const reviewSchema = z.object({
@@ -143,6 +144,106 @@ export async function createReview(
         success: false,
         error: 'Failed to save sides.',
       }
+    }
+  }
+
+  return {
+    success: true,
+  }
+}
+
+export async function logVisit(shopId: string) {
+  const validation = z.string().uuid().safeParse(shopId)
+
+  if (!validation.success) {
+    return {
+      success: false,
+      error: 'Invalid shop.',
+    }
+  }
+
+  const supabase = await createClient()
+
+  /*
+   * Make sure the user is authenticated
+   */
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
+  if (!user) {
+    return {
+      success: false,
+      error: 'You must be logged in.',
+    }
+  }
+
+  /*
+   * Make sure the shop is active
+   */
+
+  const { data: shop, error: shopError } = await supabase
+    .from('shops')
+    .select('is_active')
+    .eq('id', shopId)
+    .single()
+
+  if (shopError || !shop) {
+    console.error(shopError)
+
+    return {
+      success: false,
+      error: 'Shop not found.',
+    }
+  }
+
+  if (!shop.is_active) {
+    return {
+      success: false,
+      error: 'This shop is inactive.',
+    }
+  }
+
+  const visitedAt = getTodayInMalaysia()
+
+  /*
+   * Only allow one visit per shop per day
+   */
+
+  const { count, error: existsError } = await supabase
+    .from('visits')
+    .select('id', { count: 'exact', head: true })
+    .eq('shop_id', shopId)
+    .eq('visited_at', visitedAt)
+
+  if (existsError) {
+    console.error(existsError)
+
+    return {
+      success: false,
+      error: 'Failed to log visit.',
+    }
+  }
+
+  if ((count ?? 0) > 0) {
+    return {
+      success: false,
+      error: 'You already logged a visit for today.',
+    }
+  }
+
+  const { error } = await supabase.from('visits').insert({
+    shop_id: shopId,
+    visited_at: visitedAt,
+  })
+
+  if (error) {
+    console.error(error)
+
+    return {
+      success: false,
+      error: 'Failed to log visit.',
     }
   }
 

@@ -3,7 +3,9 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
 import { createClient } from "@/lib/supabase/server";
+import { formatVisitDate, getTodayInMalaysia } from "@/lib/dates";
 import Header from "@/components/layout/Header";
+import LogVisitButton from "@/components/admin/LogVisitButton";
 
 type PageProps = {
   params: Promise<{
@@ -34,6 +36,13 @@ export default async function ShopPage({ params }: PageProps) {
   const { id } = await params;
 
   const supabase = await createClient();
+
+  /*
+   * Check if the admin is logged in
+   */
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
   /*
    * Get shop information
@@ -94,6 +103,9 @@ export default async function ShopPage({ params }: PageProps) {
   if (visitsError) {
     console.error("FAILED TO LOAD VISITS:", visitsError);
   }
+
+  const visitedToday =
+    visits?.some((visit) => visit.visited_at === getTodayInMalaysia()) ?? false;
 
   /*
    * Calculate overall/category ratings
@@ -207,10 +219,16 @@ export default async function ShopPage({ params }: PageProps) {
             )}
 
             {/* Visit count */}
-            <p className="mt-6 text-sm text-stone-500 dark:text-stone-400">
-              {visits?.length ?? 0}{" "}
-              {(visits?.length ?? 0) === 1 ? "visit" : "visits"}
-            </p>
+            <div className="mt-6 flex flex-wrap items-center justify-between gap-4">
+              <p className="text-sm text-stone-500 dark:text-stone-400">
+                {visits?.length ?? 0}{" "}
+                {(visits?.length ?? 0) === 1 ? "visit" : "visits"}
+              </p>
+
+              {user && (
+                <LogVisitButton shopId={shop.id} visitedToday={visitedToday} />
+              )}
+            </div>
           </div>
         </div>
 
@@ -233,9 +251,9 @@ export default async function ShopPage({ params }: PageProps) {
           </div>
         </section>
 
-        {/* Reviews */}
+        {/* Visits */}
         <section className="mt-10">
-          <h2 className="text-2xl font-bold">Reviews</h2>
+          <h2 className="text-2xl font-bold">Visit history</h2>
 
           <div className="mt-4 space-y-5">
             {visits && visits.length > 0 ? (
@@ -265,8 +283,14 @@ export default async function ShopPage({ params }: PageProps) {
                     <div className="flex items-start justify-between gap-4">
                       <div>
                         <p className="font-semibold">
-                          {formatDate(visit.visited_at)}
+                          {formatVisitDate(visit.visited_at)}
                         </p>
+
+                        {!rating && (
+                          <p className="mt-1 text-sm text-stone-400">
+                            Quick visit — no review
+                          </p>
+                        )}
                       </div>
 
                       {reviewOverall !== null && (
@@ -367,7 +391,7 @@ export default async function ShopPage({ params }: PageProps) {
             ) : (
               <div className="rounded-2xl border bg-white p-8 text-center dark:bg-stone-900">
                 <p className="text-stone-500 dark:text-stone-400">
-                  No reviews yet.
+                  No visits yet.
                 </p>
               </div>
             )}
@@ -424,12 +448,3 @@ function MiniRating({
   );
 }
 
-function formatDate(date: string) {
-  const [year, month, day] = date.split("-").map(Number);
-
-  return new Date(year, month - 1, day).toLocaleDateString("en-MY", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
-}

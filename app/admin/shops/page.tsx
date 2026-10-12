@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
+import { getTodayInMalaysia } from "@/lib/dates";
 import DeactivateShopButton from "@/components/admin/DeactivateShopButton";
 import ActivateShopButton from "@/components/admin/ActivateShopButton";
+import LogVisitButton from "@/components/admin/LogVisitButton";
 import AdminNav from "@/components/admin/AdminNav";
 
 export default async function ShopsPage() {
@@ -23,6 +25,15 @@ export default async function ShopsPage() {
       </main>
     );
   }
+
+  const { data: todaysVisits } = await supabase
+    .from("visits")
+    .select("shop_id")
+    .eq("visited_at", getTodayInMalaysia());
+
+  const visitedShopIds = new Set(
+    (todaysVisits ?? []).map((visit) => visit.shop_id),
+  );
 
   return (
     <main className="min-h-screen">
@@ -92,14 +103,7 @@ export default async function ShopsPage() {
                   </td>
 
                   <td className="px-4 py-4">
-                    <div className="flex gap-4">
-                      <Link
-                        href={`/admin/shops/${shop.id}/edit`}
-                        className="font-medium underline"
-                      >
-                        Edit
-                      </Link>
-
+                    <div className="flex items-center gap-4 whitespace-nowrap">
                       <Link
                         href={`/admin/shops/${shop.id}`}
                         className="rounded-lg bg-orange-600 px-4 py-2 text-sm font-medium text-white"
@@ -107,18 +111,35 @@ export default async function ShopsPage() {
                         Manage
                       </Link>
 
-                      <Link
-                        href={`/admin/shops/${shop.id}/photos`}
-                        className="rounded-lg border px-4 py-2 text-sm font-medium hover:bg-stone-100 dark:hover:bg-stone-800"
-                      >
-                        Photos
-                      </Link>
+                      <div className="flex items-center gap-4 border-l border-stone-200 pl-4 dark:border-stone-700">
+                        {shop.is_active && (
+                          <LogVisitButton
+                            shopId={shop.id}
+                            visitedToday={visitedShopIds.has(shop.id)}
+                            compact
+                          />
+                        )}
 
-                      {shop.is_active ? (
-                        <DeactivateShopButton shopId={shop.id} />
-                      ) : (
-                        <ActivateShopButton shopId={shop.id} />
-                      )}
+                        <Link
+                          href={`/admin/shops/${shop.id}/edit`}
+                          className="text-sm font-medium text-stone-500 hover:text-stone-900 hover:underline dark:text-stone-400 dark:hover:text-white"
+                        >
+                          Edit
+                        </Link>
+
+                        <Link
+                          href={`/admin/shops/${shop.id}/photos`}
+                          className="text-sm font-medium text-stone-500 hover:text-stone-900 hover:underline dark:text-stone-400 dark:hover:text-white"
+                        >
+                          Photos
+                        </Link>
+
+                        {shop.is_active ? (
+                          <DeactivateShopButton shopId={shop.id} />
+                        ) : (
+                          <ActivateShopButton shopId={shop.id} />
+                        )}
+                      </div>
                     </div>
                   </td>
                 </tr>
