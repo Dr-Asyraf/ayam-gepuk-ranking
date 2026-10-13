@@ -68,7 +68,8 @@ export default async function AdminShopPage({ params }: PageProps) {
           <h2 className="text-lg font-bold">Photos</h2>
 
           <p className="mt-1 text-sm text-stone-500 dark:text-stone-400">
-            Upload, set a primary photo and delete photos.
+            Upload photos, set a primary photo and choose which photos are
+            shown on the shop page.
           </p>
 
           <Link

@@ -28,7 +28,7 @@ export default async function ShopPhotosPage({ params }: PageProps) {
 
   const { data: photos, error: photosError } = await supabase
     .from("photos")
-    .select("id, image_url, caption, is_primary, created_at")
+    .select("id, image_url, caption, is_primary, is_featured, created_at")
     .eq("shop_id", id)
     .order("created_at", {
       ascending: false,

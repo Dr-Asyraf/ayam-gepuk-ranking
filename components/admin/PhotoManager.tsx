@@ -10,6 +10,7 @@ type Photo = {
   image_url: string;
   caption: string | null;
   is_primary: boolean;
+  is_featured: boolean;
   created_at: string;
 };
 
@@ -102,6 +103,7 @@ export default function PhotoManager({
           shop_id: shopId,
           image_url: imageUrl,
           is_primary: isPrimary,
+          is_featured: true,
         })
         .select()
         .single();
@@ -186,6 +188,49 @@ export default function PhotoManager({
 
       setMessage(
         error instanceof Error ? error.message : "Failed to set primary photo.",
+      );
+    }
+  };
+
+  /*
+   * Toggle photo visibility on the shop page
+   */
+
+  const handleToggleFeatured = async (photo: Photo) => {
+    setMessage("");
+
+    try {
+      const supabase = createClient();
+
+      const { error } = await supabase
+        .from("photos")
+        .update({ is_featured: !photo.is_featured })
+        .eq("id", photo.id);
+
+      if (error) {
+        throw new Error(error.message);
+      }
+
+      setPhotos((current) =>
+        current.map((item) =>
+          item.id === photo.id
+            ? { ...item, is_featured: !photo.is_featured }
+            : item,
+        ),
+      );
+
+      setMessage(
+        photo.is_featured
+          ? "Photo hidden from shop page."
+          : "Photo shown on shop page.",
+      );
+    } catch (error) {
+      console.error("TOGGLE FEATURED ERROR:", error);
+
+      setMessage(
+        error instanceof Error
+          ? error.message
+          : "Failed to update photo visibility.",
       );
     }
   };
@@ -316,13 +361,27 @@ export default function PhotoManager({
                 </div>
 
                 <div className="p-4">
-                  {photo.is_primary && (
-                    <span className="inline-block rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-800 dark:bg-green-950/50 dark:text-green-300">
-                      Primary photo
-                    </span>
-                  )}
+                  <div className="flex flex-wrap gap-2">
+                    {photo.is_primary && (
+                      <span className="inline-block rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-800 dark:bg-green-950/50 dark:text-green-300">
+                        Primary photo
+                      </span>
+                    )}
 
-                  <div className="mt-4 flex gap-2">
+                    <span
+                      className={`inline-block rounded-full px-3 py-1 text-xs font-medium ${
+                        photo.is_featured
+                          ? "bg-sky-100 text-sky-800 dark:bg-sky-950/50 dark:text-sky-300"
+                          : "bg-stone-100 text-stone-500 dark:bg-stone-800 dark:text-stone-400"
+                      }`}
+                    >
+                      {photo.is_featured
+                        ? "Shown on shop page"
+                        : "Hidden from shop page"}
+                    </span>
+                  </div>
+
+                  <div className="mt-4 flex flex-wrap gap-2">
                     {!photo.is_primary && (
                       <button
                         type="button"
@@ -332,6 +391,14 @@ export default function PhotoManager({
                         Set primary
                       </button>
                     )}
+
+                    <button
+                      type="button"
+                      onClick={() => handleToggleFeatured(photo)}
+                      className="rounded-lg border px-3 py-2 text-sm font-medium hover:bg-stone-100 dark:hover:bg-stone-800"
+                    >
+                      {photo.is_featured ? "Hide from page" : "Show on page"}
+                    </button>
 
                     <button
                       type="button"

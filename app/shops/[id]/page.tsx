@@ -62,15 +62,54 @@ export default async function ShopPage({ params }: PageProps) {
   }
 
   /*
-   * Get primary photo
+   * Get primary photo (banner)
    */
   const { data: primaryPhoto } = await supabase
     .from("photos")
-    .select("image_url, caption")
+    .select("id, image_url, caption")
     .eq("shop_id", id)
     .eq("is_primary", true)
     .limit(1)
     .maybeSingle();
+
+  /*
+   * Get gallery photos
+   */
+  const { data: galleryData, error: galleryError } = await supabase
+    .from("photos")
+    .select("id, image_url, is_primary, is_featured")
+    .eq("shop_id", id)
+    .order("created_at", {
+      ascending: true,
+    });
+
+  let galleryPhotos: { id: string; image_url: string }[] = [];
+
+  if (galleryError) {
+    console.error("FAILED TO LOAD GALLERY PHOTOS:", galleryError);
+
+    /*
+     * Fallback when is_featured hasn't been
+     * added to the table yet.
+     */
+    const { data: fallback, error: fallbackError } = await supabase
+      .from("photos")
+      .select("id, image_url, is_primary")
+      .eq("shop_id", id)
+      .order("created_at", {
+        ascending: true,
+      });
+
+    if (!fallbackError && fallback) {
+      galleryPhotos = fallback.filter(
+        (photo) => photo.id !== primaryPhoto?.id,
+      );
+    }
+  } else if (galleryData) {
+    galleryPhotos = galleryData.filter(
+      (photo) => photo.is_featured && photo.id !== primaryPhoto?.id,
+    );
+  }
 
   /*
    * Get all visits
@@ -234,6 +273,30 @@ export default async function ShopPage({ params }: PageProps) {
             </div>
           </div>
         </div>
+
+        {/* Photos */}
+        {galleryPhotos.length > 0 && (
+          <section className="mt-6">
+            <h2 className="text-2xl font-bold">Photos</h2>
+
+            <div className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3">
+              {galleryPhotos.map((photo) => (
+                <div
+                  key={photo.id}
+                  className="relative aspect-[4/3] overflow-hidden rounded-2xl border bg-white dark:bg-stone-900"
+                >
+                  <Image
+                    src={photo.image_url}
+                    alt={`${shop.name} photo`}
+                    fill
+                    sizes="(max-width: 640px) 50vw, 33vw"
+                    className="object-cover"
+                  />
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* Ratings */}
         <section className="mt-6">
