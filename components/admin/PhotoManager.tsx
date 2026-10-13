@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 
 import { createClient } from "@/lib/supabase/client";
 
@@ -304,11 +305,13 @@ export default function PhotoManager({
                 key={photo.id}
                 className="overflow-hidden rounded-2xl border bg-white dark:bg-stone-900"
               >
-                <div className="aspect-[4/3] overflow-hidden bg-stone-100 dark:bg-stone-800">
-                  <img
+                <div className="relative aspect-[4/3] overflow-hidden bg-stone-100 dark:bg-stone-800">
+                  <Image
                     src={photo.image_url}
                     alt={photo.caption ?? "Shop photo"}
-                    className="h-full w-full object-cover"
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover"
                   />
                 </div>
 

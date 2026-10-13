@@ -73,73 +73,67 @@ export default function RankingList({ shops }: RankingListProps) {
   return (
     <div>
       {/* Filters */}
-      <div className="mb-8 rounded-2xl border bg-white p-5 dark:bg-stone-900">
-        <div className="grid gap-4 md:grid-cols-3">
+      <div className="mb-8 rounded-2xl border border-stone-200/80 bg-white p-4 shadow-sm dark:border-stone-800 dark:bg-stone-900">
+        <div className="flex flex-col gap-3 md:flex-row md:items-center">
           {/* Search */}
-          <div>
-            <label htmlFor="search" className="mb-2 block text-sm font-medium">
-              Search shops
-            </label>
+          <div className="relative flex-1">
+            <span
+              aria-hidden="true"
+              className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-sm"
+            >
+              🔎
+            </span>
 
             <input
               id="search"
               type="text"
-              placeholder="e.g. Ayam Gepuk Pak Gembus"
+              aria-label="Search shops"
+              placeholder="Search shops..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full rounded-xl border px-4 py-3 outline-none transition focus:border-orange-500 dark:bg-stone-800"
+              className="w-full rounded-full border border-stone-200 bg-stone-50 py-2.5 pl-11 pr-4 text-sm outline-none transition focus:border-amber-500 focus:bg-white dark:border-stone-700 dark:bg-stone-800 dark:focus:bg-stone-900"
             />
           </div>
 
           {/* State */}
-          <div>
-            <label htmlFor="state" className="mb-2 block text-sm font-medium">
-              State
-            </label>
+          <select
+            id="state"
+            aria-label="Filter by state"
+            value={stateFilter}
+            onChange={(e) => handleStateChange(e.target.value)}
+            className="rounded-full border border-stone-200 bg-stone-50 px-4 py-2.5 text-sm outline-none transition focus:border-amber-500 dark:border-stone-700 dark:bg-stone-800"
+          >
+            <option value="">All states</option>
 
-            <select
-              id="state"
-              value={stateFilter}
-              onChange={(e) => handleStateChange(e.target.value)}
-              className="w-full rounded-xl border bg-white px-4 py-3 outline-none transition focus:border-orange-500 dark:bg-stone-800"
-            >
-              <option value="">All states</option>
-
-              {states.map((state) => (
-                <option key={state} value={state ?? ""}>
-                  {state}
-                </option>
-              ))}
-            </select>
-          </div>
+            {states.map((state) => (
+              <option key={state} value={state ?? ""}>
+                {state}
+              </option>
+            ))}
+          </select>
 
           {/* City */}
-          <div>
-            <label htmlFor="city" className="mb-2 block text-sm font-medium">
-              City
-            </label>
+          <select
+            id="city"
+            aria-label="Filter by city"
+            value={cityFilter}
+            onChange={(e) => setCityFilter(e.target.value)}
+            disabled={cities.length === 0}
+            className="rounded-full border border-stone-200 bg-stone-50 px-4 py-2.5 text-sm outline-none transition focus:border-amber-500 disabled:bg-stone-100 disabled:text-stone-400 dark:border-stone-700 dark:bg-stone-800 dark:disabled:bg-stone-700 dark:disabled:text-stone-500"
+          >
+            <option value="">All cities</option>
 
-            <select
-              id="city"
-              value={cityFilter}
-              onChange={(e) => setCityFilter(e.target.value)}
-              disabled={cities.length === 0}
-              className="w-full rounded-xl border bg-white px-4 py-3 outline-none transition focus:border-orange-500 disabled:bg-stone-100 disabled:text-stone-400 dark:bg-stone-800 dark:disabled:bg-stone-700 dark:disabled:text-stone-500"
-            >
-              <option value="">All cities</option>
-
-              {cities.map((city) => (
-                <option key={city} value={city ?? ""}>
-                  {city}
-                </option>
-              ))}
-            </select>
-          </div>
+            {cities.map((city) => (
+              <option key={city} value={city ?? ""}>
+                {city}
+              </option>
+            ))}
+          </select>
         </div>
 
         {/* Filter summary */}
-        <div className="mt-4 flex items-center justify-between">
-          <p className="text-sm text-stone-500 dark:text-stone-400">
+        <div className="mt-3 flex items-center justify-between px-1">
+          <p className="text-sm text-stone-600 dark:text-stone-400">
             Showing{" "}
             <span className="font-medium text-stone-700 dark:text-stone-200">
               {filteredShops.length}

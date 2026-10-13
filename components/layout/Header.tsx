@@ -3,10 +3,13 @@ import ThemeToggle from "./ThemeToggle";
 
 export default function Header() {
   return (
-    <header className="border-b bg-white dark:bg-stone-900">
-      <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
+    <header className="sticky top-0 z-50 w-full border-b bg-white/80 backdrop-blur-md dark:bg-stone-900/80">
+      <div className="flex items-center justify-between px-6 py-3.5 md:px-12">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 font-bold">
+        <Link
+          href="/"
+          className="flex items-center gap-2 font-bold text-stone-900 transition-colors dark:text-stone-100"
+        >
           <span className="text-2xl">🍗</span>
 
           <span className="hidden sm:inline">Ayam Gepuk Rankings</span>
@@ -18,7 +21,7 @@ export default function Header() {
         <nav className="flex items-center gap-5 text-sm font-medium">
           <Link
             href="/"
-            className="text-stone-600 transition hover:text-stone-900 dark:text-stone-300 dark:hover:text-white"
+            className="text-stone-700 transition-colors hover:text-stone-900 dark:text-stone-300 dark:hover:text-white"
           >
             Rankings
           </Link>

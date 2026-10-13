@@ -1,4 +1,4 @@
-import RankingCard from "@/components/rankings/RankingCard";
+import RankingList from "@/components/rankings/RankingList";
 import Header from "@/components/layout/Header";
 import { createClient } from "@/lib/supabase/server";
 
@@ -19,8 +19,10 @@ export default async function Home() {
       <>
         <Header />
         <main className="min-h-screen bg-stone-50 px-6 py-10 dark:bg-stone-950">
-          <div className="mx-auto max-w-5xl">
-            <h1 className="text-4xl font-bold">Ayam Gepuk Rankings</h1>
+          <div className="mx-auto max-w-4xl">
+            <h1 className="text-3xl font-extrabold sm:text-4xl md:text-5xl">
+              Ayam Gepuk Rankings
+            </h1>
 
             <p className="mt-4 text-red-500 dark:text-red-400">
               Failed to load rankings.
@@ -35,50 +37,25 @@ export default async function Home() {
     <>
       <Header />
       <main className="min-h-screen bg-stone-50 dark:bg-stone-950">
-      <div className="mx-auto max-w-5xl px-6 py-10">
-        {/* Header */}
-        <div>
-          <p className="text-sm font-medium uppercase tracking-wide text-stone-500 dark:text-stone-400">
-            One Man&apos;s Search For The Best Gepuk
-          </p>
+        <div className="mx-auto max-w-4xl px-6 py-10 md:px-12">
+          {/* Hero */}
+          <div className="mb-8">
+            <p className="text-xs font-bold uppercase tracking-widest text-amber-600 dark:text-amber-400">
+              One Man&apos;s Search For The Best Gepuk
+            </p>
 
-          <h1 className="mt-2 text-4xl font-bold">Asyraf&apos;s Ayam Gepuk Rankings 🍗</h1>
+            <h1 className="mt-2 text-3xl font-extrabold tracking-tight text-stone-900 sm:text-4xl md:text-5xl dark:text-stone-100">
+              Asyraf&apos;s Ayam Gepuk Rankings 🍗
+            </h1>
 
-          <p className="mt-3 text-stone-500 dark:text-stone-400">
-            Ranking my favourite ayam gepuk shops
-          </p>
+            <p className="mt-3 font-medium text-stone-600 dark:text-stone-400">
+              Ranking my favourite ayam gepuk shops
+            </p>
+          </div>
+
+          {/* Search, filters & rankings */}
+          <RankingList shops={shops ?? []} />
         </div>
-
-        {/* Rankings */}
-        <div className="mt-8 space-y-5">
-          {shops && shops.length > 0 ? (
-            shops.map((shop, index) => (
-              <RankingCard
-                key={shop.id}
-                rank={index + 1}
-                id={shop.id}
-                name={shop.name}
-                city={shop.city}
-                state={shop.state}
-                imageUrl={shop.image_url}
-                overallRating={Number(shop.overall_rating)}
-                chickenRating={Number(shop.chicken_rating)}
-                sambalKacangRating={Number(shop.sambal_kacang_rating)}
-                sayurRating={Number(shop.sayur_rating)}
-                sidesRating={Number(shop.sides_rating)}
-                visitCount={Number(shop.visit_count)}
-                lastVisitedAt={shop.last_visited_at}
-              />
-            ))
-          ) : (
-            <div className="rounded-2xl border bg-white p-10 text-center dark:bg-stone-900">
-              <p className="text-stone-500 dark:text-stone-400">
-                No ranked shops yet.
-              </p>
-            </div>
-          )}
-        </div>
-      </div>
       </main>
     </>
   );

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { formatVisitDate } from "@/lib/dates";
 
 type RankingCardProps = {
@@ -32,7 +33,16 @@ export default function RankingCard({
   visitCount,
   lastVisitedAt,
 }: RankingCardProps) {
-  const rankStyle =
+  const rankBadgeStyle =
+    rank === 1
+      ? "bg-amber-400 text-stone-950"
+      : rank === 2
+        ? "bg-stone-200 text-stone-900"
+        : rank === 3
+          ? "bg-orange-300 text-stone-950"
+          : "bg-stone-900/85 text-white backdrop-blur";
+
+  const cardBodyStyle =
     rank === 1
       ? "border-amber-300 bg-amber-50 dark:border-amber-500/50 dark:bg-amber-950/40"
       : rank === 2
@@ -41,42 +51,32 @@ export default function RankingCard({
           ? "border-orange-300 bg-orange-50 dark:border-orange-500/50 dark:bg-orange-950/40"
           : "border-stone-200 bg-white dark:border-stone-800 dark:bg-stone-900";
 
-  const rankBadgeStyle =
-    rank === 1
-      ? "bg-gradient-to-br from-amber-300 to-amber-500 text-amber-950 ring-white/50"
-      : rank === 2
-        ? "bg-gradient-to-br from-slate-100 to-slate-400 text-slate-800 ring-white/50"
-        : rank === 3
-          ? "bg-gradient-to-br from-orange-300 to-orange-500 text-orange-950 ring-white/50"
-          : "bg-stone-900/85 text-white ring-white/20 backdrop-blur";
-
   return (
     <Link
       href={`/shops/${id}`}
-      className="relative block overflow-hidden rounded-2xl border bg-white transition hover:-translate-y-0.5 hover:shadow-md dark:bg-stone-900"
+      className="group relative block overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md dark:border-stone-800 dark:bg-stone-900"
     >
       {/* Rank badge */}
-      <div
-        className={`absolute left-4 top-4 z-10 flex h-14 w-14 flex-col items-center justify-center rounded-2xl shadow-lg ring-1 ${rankBadgeStyle}`}
+      <span
+        className={`absolute left-4 top-4 z-10 rounded-full px-3 py-1.5 text-xs font-black uppercase tracking-wider shadow-md ${rankBadgeStyle}`}
       >
-        <span className="text-[9px] font-semibold uppercase tracking-widest opacity-70">
-          Rank
-        </span>
-
-        <span className="text-xl font-bold leading-none">{rank}</span>
-      </div>
+        Rank #{rank}
+      </span>
 
       {/* Image */}
       {imageUrl ? (
-        <div className="aspect-[16/7] w-full overflow-hidden bg-stone-100 dark:bg-stone-800">
-          <img
+        <div className="relative aspect-video w-full overflow-hidden bg-stone-100 dark:bg-stone-800">
+          <Image
             src={imageUrl}
             alt={name}
-            className="h-full w-full object-cover transition duration-300 hover:scale-105"
+            fill
+            preload={rank === 1}
+            sizes="(max-width: 896px) 100vw, 896px"
+            className="object-cover transition duration-300 group-hover:scale-105"
           />
         </div>
       ) : (
-        <div className="flex aspect-[16/7] w-full items-center justify-center bg-stone-100 dark:bg-stone-800">
+        <div className="flex aspect-video w-full items-center justify-center bg-stone-100 dark:bg-stone-800">
           <div className="text-center">
             <div className="text-5xl">🍗</div>
 
@@ -88,43 +88,43 @@ export default function RankingCard({
       )}
 
       {/* Card content */}
-      <div
-        className={`rounded-b-2xl border-t p-6 transition hover:-translate-y-1 hover:shadow-lg ${rankStyle}`}
-      >
+      <div className={`rounded-b-2xl border-t p-6 ${cardBodyStyle}`}>
         {/* Top section */}
         <div className="flex items-start justify-between gap-4">
-          <div className="flex items-start gap-4">
-            {/* Shop information */}
-            <div>
-              <h2 className="text-xl font-bold">{name}</h2>
+          {/* Shop information */}
+          <div>
+            <h2 className="text-2xl font-bold text-stone-900 dark:text-stone-100">
+              {name}
+            </h2>
 
-              {(city || state) && (
-                <p className="mt-1 text-sm text-stone-500 dark:text-stone-400">
-                  {[city, state].filter(Boolean).join(", ")}
-                </p>
-              )}
-
-              <p className="mt-1 text-sm text-stone-500 dark:text-stone-400">
-                {visitCount} {visitCount === 1 ? "visit" : "visits"}
-
-                {lastVisitedAt &&
-                  ` · Last visited ${formatVisitDate(lastVisitedAt)}`}
+            {(city || state) && (
+              <p className="mt-1 text-sm font-semibold text-stone-600 dark:text-stone-400">
+                {[city, state].filter(Boolean).join(", ")}
               </p>
-            </div>
+            )}
+
+            <p className="mt-0.5 text-xs text-stone-600 dark:text-stone-400">
+              {visitCount} {visitCount === 1 ? "visit" : "visits"}
+
+              {lastVisitedAt &&
+                ` · Last visited ${formatVisitDate(lastVisitedAt)}`}
+            </p>
           </div>
 
           {/* Overall rating */}
-          <div className="text-right">
-            <p className="text-4xl font-bold">{overallRating.toFixed(2)}</p>
+          <div className="shrink-0 text-right">
+            <p className="text-3xl font-extrabold text-stone-900 dark:text-stone-100">
+              {overallRating.toFixed(2)}
+            </p>
 
-            <p className="text-sm text-stone-500 dark:text-stone-400">
+            <p className="text-xs font-semibold text-stone-500 dark:text-stone-400">
               / 10
             </p>
           </div>
         </div>
 
         {/* Category ratings */}
-        <div className="mt-6 grid grid-cols-2 gap-3 text-sm">
+        <div className="mt-6 grid grid-cols-1 gap-3 text-sm sm:grid-cols-2">
           <Rating emoji="🍗" label="Chicken" value={chickenRating} />
 
           <Rating
@@ -140,7 +140,7 @@ export default function RankingCard({
 
         {/* Details link */}
         <div className="mt-5 border-t pt-4">
-          <p className="text-sm font-medium text-stone-500 dark:text-stone-400">
+          <p className="text-sm font-semibold text-stone-600 transition-colors group-hover:text-amber-600 dark:text-stone-400 dark:group-hover:text-amber-400">
             View shop details →
           </p>
         </div>
@@ -159,14 +159,14 @@ function Rating({
   value: number;
 }) {
   return (
-    <div className="rounded-xl bg-white/80 p-3 dark:bg-stone-800/80">
-      <p className="text-stone-500 dark:text-stone-400">
-        {emoji} {label}
+    <div className="flex items-center justify-between rounded-xl border border-stone-200/80 bg-white p-3 shadow-2xs dark:border-stone-700 dark:bg-stone-800/80">
+      <p className="flex items-center gap-2 font-semibold text-stone-700 dark:text-stone-300">
+        <span>{emoji}</span> {label}
       </p>
 
-      <p className="mt-1 font-bold">
+      <p className="font-bold text-stone-900 dark:text-stone-100">
         {value.toFixed(2)}
-        <span className="font-normal text-stone-500 dark:text-stone-400">
+        <span className="text-xs font-normal text-stone-500 dark:text-stone-400">
           {" "}
           / 10
         </span>

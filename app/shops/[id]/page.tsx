@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
@@ -169,15 +170,17 @@ export default async function ShopPage({ params }: PageProps) {
         {/* Hero */}
         <div className="mt-6 overflow-hidden rounded-3xl border bg-white dark:bg-stone-900">
           {primaryPhoto ? (
-            <div className="aspect-[16/7] w-full overflow-hidden bg-stone-100 dark:bg-stone-800">
-              <img
+            <div className="relative aspect-video w-full overflow-hidden bg-stone-100 dark:bg-stone-800">
+              <Image
                 src={primaryPhoto.image_url}
                 alt={shop.name}
-                className="h-full w-full object-cover"
+                fill
+                sizes="(max-width: 1024px) 100vw, 1024px"
+                className="object-cover"
               />
             </div>
           ) : (
-            <div className="flex aspect-[16/7] w-full items-center justify-center bg-stone-100 dark:bg-stone-800">
+            <div className="flex aspect-video w-full items-center justify-center bg-stone-100 dark:bg-stone-800">
               <div className="text-center">
                 <div className="text-7xl">🍗</div>
 
