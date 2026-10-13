@@ -1,11 +1,12 @@
 import Link from "next/link";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
 import { createClient } from "@/lib/supabase/server";
 import { formatVisitDate, getTodayInMalaysia } from "@/lib/dates";
 import Header from "@/components/layout/Header";
+import HeroPhoto from "@/components/shops/HeroPhoto";
+import PhotoGallery from "@/components/shops/PhotoGallery";
 import LogVisitButton from "@/components/admin/LogVisitButton";
 
 type PageProps = {
@@ -193,6 +194,17 @@ export default async function ShopPage({ params }: PageProps) {
     ),
   ]);
 
+  /*
+   * All displayed photos: the hero first, then the gallery.
+   * Used for fullscreen navigation starting from the banner.
+   */
+  const allPhotos = primaryPhoto
+    ? [
+        { id: primaryPhoto.id, image_url: primaryPhoto.image_url },
+        ...galleryPhotos,
+      ]
+    : [];
+
   return (
     <>
       <Header />
@@ -210,13 +222,7 @@ export default async function ShopPage({ params }: PageProps) {
         <div className="mt-6 overflow-hidden rounded-3xl border bg-white dark:bg-stone-900">
           {primaryPhoto ? (
             <div className="relative aspect-video w-full overflow-hidden bg-stone-100 dark:bg-stone-800">
-              <Image
-                src={primaryPhoto.image_url}
-                alt={shop.name}
-                fill
-                sizes="(max-width: 1024px) 100vw, 1024px"
-                className="object-cover"
-              />
+              <HeroPhoto photos={allPhotos} shopName={shop.name} />
             </div>
           ) : (
             <div className="flex aspect-video w-full items-center justify-center bg-stone-100 dark:bg-stone-800">
@@ -279,22 +285,7 @@ export default async function ShopPage({ params }: PageProps) {
           <section className="mt-6">
             <h2 className="text-2xl font-bold">Photos</h2>
 
-            <div className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3">
-              {galleryPhotos.map((photo) => (
-                <div
-                  key={photo.id}
-                  className="relative aspect-[4/3] overflow-hidden rounded-2xl border bg-white dark:bg-stone-900"
-                >
-                  <Image
-                    src={photo.image_url}
-                    alt={`${shop.name} photo`}
-                    fill
-                    sizes="(max-width: 640px) 50vw, 33vw"
-                    className="object-cover"
-                  />
-                </div>
-              ))}
-            </div>
+            <PhotoGallery photos={galleryPhotos} shopName={shop.name} />
           </section>
         )}
 
@@ -340,7 +331,7 @@ export default async function ShopPage({ params }: PageProps) {
                     4
                   : null;
 
-                return (
+  return (
                   <article
                     key={visit.id}
                     className="rounded-2xl border bg-white p-6 dark:bg-stone-900"
