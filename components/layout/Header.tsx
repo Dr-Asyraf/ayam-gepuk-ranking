@@ -18,14 +18,7 @@ export default function Header() {
         </Link>
 
         {/* Navigation */}
-        <nav className="flex items-center gap-5 text-sm font-medium">
-          <Link
-            href="/"
-            className="text-stone-700 transition-colors hover:text-stone-900 dark:text-stone-300 dark:hover:text-white"
-          >
-            Rankings
-          </Link>
-
+        <nav className="flex items-center">
           <ThemeToggle />
         </nav>
       </div>
